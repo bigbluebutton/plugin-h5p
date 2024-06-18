@@ -5,7 +5,7 @@ import {
   ActionButtonDropdownOption,
   ActionButtonDropdownSeparator,
   BbbPluginSdk,
-  GenericComponent,
+  GenericContentMainArea,
   PluginApi,
   LayoutPresentatioAreaUiDataNames,
   UiLayouts,
@@ -16,7 +16,7 @@ import {
   DataChannelTypes,
 } from 'bigbluebutton-html-plugin-sdk';
 
-import { GenericComponentRenderFunction } from '../generic-component/component';
+import { GenericContentRenderFunction } from '../generic-component/component';
 
 import { H5pPluginProps } from './types';
 import { isValidJSON } from './utils';
@@ -39,20 +39,20 @@ function H5pPlugin(
   const [contentJson, setContentJson] = useState<string>(null);
   const [currentText, setCurrentText] = useState<string>(null);
   const [linkThatGeneratedJsonContent, setLinkThatGeneratedJsonContent] = useState<string>();
-  const [genericComponentId, setGenericComponentId] = useState<string>('');
+  const [genericContentId, setGenericContentId] = useState<string>('');
 
   const currentLayout = pluginApi.useUiData(LayoutPresentatioAreaUiDataNames.CURRENT_ELEMENT, [{
     isOpen: true,
-    genericComponentId: '',
+    genericContentId: '',
     currentElement: UiLayouts.WHITEBOARD,
   }]);
 
   useEffect(() => {
-    const isGenericComponentInPile = currentLayout.some((gc) => (
-      gc.currentElement === UiLayouts.GENERIC_COMPONENT
-      && gc.genericComponentId === genericComponentId
+    const isGenericContentInPile = currentLayout.some((gc) => (
+      gc.currentElement === UiLayouts.GENERIC_CONTENT
+      && gc.genericContentId === genericContentId
     ));
-    if (isGenericComponentInPile) {
+    if (isGenericContentInPile) {
       setShowingPresentationContent(true);
     } else setShowingPresentationContent(false);
   }, [currentLayout]);
@@ -155,13 +155,13 @@ function H5pPlugin(
 
   useEffect(() => {
     if (contentJson && contentJson !== '') {
-      setGenericComponentId(pluginApi.setGenericComponents([
-        new GenericComponent({
+      setGenericContentId(pluginApi.setGenericContentItems([
+        new GenericContentMainArea({
           contentFunction: (element: HTMLElement) => {
             const root = ReactDOM.createRoot(element);
             root.render(
               <React.StrictMode>
-                <GenericComponentRenderFunction
+                <GenericContentRenderFunction
                   jsonContent={contentJson}
                   currentUser={currentUser}
                   pluginUuid={uuid}
@@ -173,7 +173,7 @@ function H5pPlugin(
         }),
       ])[0]);
     } else {
-      pluginApi.setGenericComponents([]);
+      pluginApi.setGenericContentItems([]);
     }
   }, [contentJson, currentUser]);
   return null;

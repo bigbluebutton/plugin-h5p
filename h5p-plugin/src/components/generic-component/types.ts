@@ -5,7 +5,7 @@ export interface UserH5pCurrentState {
   currentState: object;
 }
 
-export interface GenericComponentRenderFunctionProps {
+export interface GenericContentRenderFunctionProps {
   jsonContent: string;
   currentUser: CurrentUserData;
   linkThatGeneratedJsonContent: string;

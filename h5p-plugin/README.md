@@ -4,7 +4,7 @@
 
 This plugin is part of the closed-source plugins. What it does is basically expand the activities possibility since it embeds the h5p into the presentation area with whatever content the teacher wants.
 
-Moreover, this plugin has its specific libraries to properly render the h5p-content, so pay attention to the instructions ahead. 
+Moreover, this plugin has its specific libraries to properly render the h5p-content, so pay attention to the instructions ahead.
 
 ## Running the Plugin from Source
 
@@ -27,11 +27,11 @@ The `fetch-dependencies` script is responsible for cloning the `bigbluebutton/h5
       url: http://127.0.0.1:4701/static/H5pPlugin.js
       dataChannels:
         - name: jsonContent
-          writePermission: ['moderator','presenter']
-          deletePermission: ['moderator', 'sender']
+          pushPermission: ['moderator','presenter']
+          replaceOrDeletePermission: ['moderator', 'sender']
         - name: testResult
-          writePermission: ['all']
-          deletePermission: ['moderator', 'sender']
+          pushPermission: ['all']
+          replaceOrDeletePermission: ['moderator', 'sender']
 ```
 
 ## Building the Plugin
@@ -58,11 +58,11 @@ public:
       url: <<PLUGIN_URL>>
       dataChannels:
         - name: jsonContent
-          writePermission: ['moderator','presenter']
-          deletePermission: ['moderator', 'sender']
+          pushPermission: ['moderator','presenter']
+          replaceOrDeletePermission: ['moderator', 'sender']
         - name: testResult
-          writePermission: ['all']
-          deletePermission: ['moderator', 'sender']
+          pushPermission: ['all']
+          replaceOrDeletePermission: ['moderator', 'sender']
   ... // All other configurations
 ```
 

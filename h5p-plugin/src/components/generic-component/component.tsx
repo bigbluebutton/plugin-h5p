@@ -7,14 +7,14 @@ import {
 import { useEffect } from 'react';
 import * as React from 'react';
 import {
-  GenericComponentRenderFunctionProps,
+  GenericContentRenderFunctionProps,
   TestResult, UserH5pCurrentState, UsersMoreInformationGraphqlResponse,
 } from './types';
 import NonPresenterViewComponent from './non-presenter-view/component';
 import PresenterViewComponent from './presenter-view/component';
 import { USERS_MORE_INFORMATION } from './subscriptions';
 
-export function GenericComponentRenderFunction(props: GenericComponentRenderFunctionProps) {
+export function GenericContentRenderFunction(props: GenericContentRenderFunctionProps) {
   const {
     jsonContent, currentUser,
     pluginUuid, linkThatGeneratedJsonContent,
