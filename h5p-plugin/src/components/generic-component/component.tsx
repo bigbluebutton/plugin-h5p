@@ -23,16 +23,16 @@ export function GenericContentRenderFunction(props: GenericContentRenderFunction
   const currentUserPresenter = currentUser?.presenter;
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(pluginUuid);
 
-  const [
-    responseUserH5pCurrentStateList,
-    pushUserH5pCurrentStateList,
-    deleteUserH5pCurrentStateList,
-    replaceUserH5pCurrentStateList,
-  ] = pluginApi.useDataChannel<UserH5pCurrentState>('testResult', DataChannelTypes.All_ITEMS, 'userH5pCurrentState');
+  const {
+    data: responseUserH5pCurrentStateList,
+    pushEntry: pushUserH5pCurrentStateList,
+    deleteEntry: deleteUserH5pCurrentStateList,
+    replaceEntry: replaceUserH5pCurrentStateList,
+  } = pluginApi.useDataChannel<UserH5pCurrentState>('testResult', DataChannelTypes.All_ITEMS, 'userH5pCurrentState');
 
   // TODO: Refactor the test results to be just a request done for an external server to be
   // validated and all
-  const [testResult, testResultDispatcher] = pluginApi.useDataChannel<TestResult>('testResult', DataChannelTypes.LATEST_ITEM, linkThatGeneratedJsonContent);
+  const { data: testResult, pushEntry: testResultDispatcher } = pluginApi.useDataChannel<TestResult>('testResult', DataChannelTypes.LATEST_ITEM, linkThatGeneratedJsonContent);
 
   useEffect(() => () => {
     if (currentUser && currentUser.presenter) deleteUserH5pCurrentStateList([RESET_DATA_CHANNEL]);

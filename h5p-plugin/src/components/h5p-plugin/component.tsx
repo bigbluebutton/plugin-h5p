@@ -35,7 +35,7 @@ function H5pPlugin(
   const [showingPresentationContent, setShowingPresentationContent] = useState(false);
   const { data: currentUser } = pluginApi.useCurrentUser();
   const currentPresentationResponse = pluginApi.useCurrentPresentation();
-  const [jsonContentResponse, jsonContentPushFunction, jsonContentDeleteEntries] = pluginApi.useDataChannel<DataToGenericLink>('jsonContent', DataChannelTypes.LATEST_ITEM);
+  const { data: jsonContentResponse, pushEntry: jsonContentPushFunction, deleteEntry: jsonContentDeleteEntries } = pluginApi.useDataChannel<DataToGenericLink>('jsonContent', DataChannelTypes.LATEST_ITEM);
   const [contentJson, setContentJson] = useState<string>(null);
   const [currentText, setCurrentText] = useState<string>(null);
   const [linkThatGeneratedJsonContent, setLinkThatGeneratedJsonContent] = useState<string>();
