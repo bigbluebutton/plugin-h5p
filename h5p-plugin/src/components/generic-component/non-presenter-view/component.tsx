@@ -9,24 +9,26 @@ declare const window: CurrentH5pStateWindow;
 
 window.currentH5pState = '';
 function NonPresenterViewComponent(props: NonPresenterViewComponentProps) {
+  const stopInfinitLoop = useRef(false);
   const containerRef = useRef(null);
 
+  const [contentRendered, setContentRendered] = useState(false);
   const [h5pState, setH5pState] = useState({});
   const {
     jsonContent,
-    testResultDispatcher, currentUserId,
+    pushEntryTestResult, currentUserId,
     pushH5pCurrentState, lastUpdateId, lastPayloadJson,
     replaceH5pCurrentState,
   } = props;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const eventHandler = (event: any) => {
-    if (event.getScore && event.getMaxScore && event.getVerb && testResultDispatcher) {
+    if (event.getScore && event.getMaxScore && event.getVerb && pushEntryTestResult) {
       const score = event.getScore();
       const maxScore = event.getMaxScore();
       const verb = event.getVerb();
       if (verb === 'answered') {
-        testResultDispatcher({
+        pushEntryTestResult({
           userId: currentUserId,
           testResultObject: score,
           testResultMaximumScore: maxScore,
@@ -53,12 +55,14 @@ function NonPresenterViewComponent(props: NonPresenterViewComponentProps) {
     }
   }, [h5pState]);
   useEffect(() => {
+    window.H5P?.externalDispatcher?.on('xAPI', eventHandler);
     const timeoutReference = setTimeout(
       renderH5pForNonPresenter(
         containerRef,
         lastPayloadJson,
         setH5pState,
         jsonContent,
+        setContentRendered,
       ),
       100,
     );
@@ -68,6 +72,10 @@ function NonPresenterViewComponent(props: NonPresenterViewComponentProps) {
       clearTimeout(timeoutReference);
     };
   }, []);
+  if (pushEntryTestResult && !stopInfinitLoop.current && contentRendered) {
+    stopInfinitLoop.current = true;
+    window.H5P?.externalDispatcher?.on('xAPI', eventHandler);
+  }
 
   return (
     <div

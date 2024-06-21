@@ -14,12 +14,17 @@ import {
   pluginLogger,
   RESET_DATA_CHANNEL,
   DataChannelTypes,
+  GenericContentSidekickArea,
+  GenericContentInterface,
 } from 'bigbluebutton-html-plugin-sdk';
 
 import { GenericContentRenderFunction } from '../generic-component/component';
 
 import { H5pPluginProps } from './types';
 import { isValidJSON } from './utils';
+import PresenterViewerSidekickRenderResultFunction from '../generic-component/presenter-view/sidekick-content/component';
+import { TestResult, UsersMoreInformationGraphqlResponse } from '../generic-component/types';
+import { USERS_MORE_INFORMATION } from '../generic-component/subscriptions';
 
 interface DataToGenericLink {
   contentJson?: string,
@@ -32,6 +37,7 @@ function H5pPlugin(
   BbbPluginSdk.initialize(uuid);
   const SEARCH_PATTERN = /H5P(\s*\{(.|\n|\r\n)*\})/g;
   const pluginApi: PluginApi = BbbPluginSdk.getPluginApi(uuid);
+  const previousTestResult = React.useRef('');
   const [showingPresentationContent, setShowingPresentationContent] = useState(false);
   const { data: currentUser } = pluginApi.useCurrentUser();
   const currentPresentationResponse = pluginApi.useCurrentPresentation();
@@ -39,7 +45,13 @@ function H5pPlugin(
   const [contentJson, setContentJson] = useState<string>(null);
   const [currentText, setCurrentText] = useState<string>(null);
   const [linkThatGeneratedJsonContent, setLinkThatGeneratedJsonContent] = useState<string>();
+  const { data: testResultResponse, deleteEntry: testResultDeleteEntry } = pluginApi.useDataChannel<TestResult>('testResult', DataChannelTypes.All_ITEMS);
+  const { deleteEntry: deleteUserH5pCurrentStateList } = pluginApi.useDataChannel<TestResult>('testResult', DataChannelTypes.All_ITEMS, 'userH5pCurrentState');
   const [genericContentId, setGenericContentId] = useState<string>('');
+  const allUsersInfo = pluginApi.useCustomSubscription<UsersMoreInformationGraphqlResponse>(
+    USERS_MORE_INFORMATION,
+  );
+  const usersList = allUsersInfo?.data?.user;
 
   const currentLayout = pluginApi.useUiData(LayoutPresentatioAreaUiDataNames.CURRENT_ELEMENT, [{
     isOpen: true,
@@ -140,6 +152,8 @@ function H5pPlugin(
             tooltip: 'Remove H5P plugin',
             allowed: true,
             onClick: () => {
+              deleteUserH5pCurrentStateList([RESET_DATA_CHANNEL]);
+              testResultDeleteEntry([RESET_DATA_CHANNEL]);
               jsonContentDeleteEntries([RESET_DATA_CHANNEL]);
             },
           }),
@@ -154,27 +168,52 @@ function H5pPlugin(
   }, [currentUser, showingPresentationContent, currentText]);
 
   useEffect(() => {
+    const genericContentList: GenericContentInterface[] = [] as GenericContentInterface[];
+    let mainAreaIsRendering = false;
     if (contentJson && contentJson !== '') {
-      setGenericContentId(pluginApi.setGenericContentItems([
-        new GenericContentMainArea({
-          contentFunction: (element: HTMLElement) => {
-            const root = ReactDOM.createRoot(element);
-            root.render(
-              <React.StrictMode>
-                <GenericContentRenderFunction
-                  jsonContent={contentJson}
-                  currentUser={currentUser}
-                  pluginUuid={uuid}
-                  linkThatGeneratedJsonContent={linkThatGeneratedJsonContent}
-                />
-              </React.StrictMode>,
-            );
-          },
-        }),
-      ])[0]);
-    } else {
-      pluginApi.setGenericContentItems([]);
+      genericContentList.push(new GenericContentMainArea({
+        contentFunction: (element: HTMLElement) => {
+          const root = ReactDOM.createRoot(element);
+          root.render(
+            <React.StrictMode>
+              <GenericContentRenderFunction
+                jsonContent={contentJson}
+                currentUser={currentUser}
+                pluginUuid={uuid}
+              />
+            </React.StrictMode>,
+          );
+        },
+      }));
+      mainAreaIsRendering = true;
     }
+    if (currentUser?.presenter) {
+      previousTestResult.current = JSON.stringify(testResultResponse.data);
+      genericContentList.push(new GenericContentSidekickArea({
+        name: 'Students results',
+        section: 'Studens',
+        contentFunction: (element) => {
+          const root = ReactDOM.createRoot(element);
+          root.render(
+            <React.StrictMode>
+              <PresenterViewerSidekickRenderResultFunction
+                currentUserId={currentUser.userId}
+                pluginUuid={uuid}
+                usersList={usersList}
+              />
+            </React.StrictMode>,
+          );
+        },
+        buttonIcon: 'user',
+        open: false,
+      }));
+    }
+    const genericContentIdList = pluginApi.setGenericContentItems(genericContentList);
+    genericContentIdList.forEach((genericContentIdToBeSet, indexOfGenericContent) => {
+      if (mainAreaIsRendering && indexOfGenericContent === 0) {
+        setGenericContentId(genericContentIdToBeSet);
+      }
+    });
   }, [contentJson, currentUser]);
   return null;
 }

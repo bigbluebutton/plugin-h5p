@@ -52,6 +52,7 @@ export const renderH5pForNonPresenter = (
   lastPayloadJson,
   setH5pState,
   jsonContent,
+  setContentRendered,
 ) => renderH5p(
   containerRef,
   false,
@@ -59,7 +60,7 @@ export const renderH5pForNonPresenter = (
   lastPayloadJson,
   setH5pState,
   jsonContent,
-  () => {},
+  setContentRendered,
 );
 
 export const renderH5pForPresenter = (

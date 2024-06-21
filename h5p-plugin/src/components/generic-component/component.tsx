@@ -17,7 +17,7 @@ import { USERS_MORE_INFORMATION } from './subscriptions';
 export function GenericContentRenderFunction(props: GenericContentRenderFunctionProps) {
   const {
     jsonContent, currentUser,
-    pluginUuid, linkThatGeneratedJsonContent,
+    pluginUuid,
   } = props;
 
   const currentUserPresenter = currentUser?.presenter;
@@ -32,7 +32,7 @@ export function GenericContentRenderFunction(props: GenericContentRenderFunction
 
   // TODO: Refactor the test results to be just a request done for an external server to be
   // validated and all
-  const { data: testResult, pushEntry: testResultDispatcher } = pluginApi.useDataChannel<TestResult>('testResult', DataChannelTypes.LATEST_ITEM, linkThatGeneratedJsonContent);
+  const { data: testResult, pushEntry: pushEntryTestResult } = pluginApi.useDataChannel<TestResult>('testResult', DataChannelTypes.LATEST_ITEM);
 
   useEffect(() => () => {
     if (currentUser && currentUser.presenter) deleteUserH5pCurrentStateList([RESET_DATA_CHANNEL]);
@@ -63,7 +63,7 @@ export function GenericContentRenderFunction(props: GenericContentRenderFunction
         <NonPresenterViewComponent
           currentUserId={currentUser?.userId}
           jsonContent={jsonContent}
-          testResultDispatcher={testResultDispatcher}
+          pushEntryTestResult={pushEntryTestResult}
           pushH5pCurrentState={pushUserH5pCurrentStateList}
           lastUpdateId={responseObject?.entryId}
           lastPayloadJson={responseObject?.payloadJson}

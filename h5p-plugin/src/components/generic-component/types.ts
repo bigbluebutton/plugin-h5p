@@ -8,12 +8,7 @@ export interface UserH5pCurrentState {
 export interface GenericContentRenderFunctionProps {
   jsonContent: string;
   currentUser: CurrentUserData;
-  linkThatGeneratedJsonContent: string;
   pluginUuid: string;
-}
-
-export interface TestResultObject {
-  score: number
 }
 
 export interface TestResult {

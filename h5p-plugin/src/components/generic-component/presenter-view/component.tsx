@@ -20,8 +20,13 @@ const mapObject = (
 
 function PresenterViewComponent(props: PresenterViewComponentProps) {
   const {
-    h5pLatestStateUpdate, jsonContent,
+    h5pLatestStateUpdate, jsonContent, testResult,
   } = props;
+
+  const userIdTestResultList = testResult?.data?.map((item) => item.payloadJson.userId);
+  const dataToBeRendered = h5pLatestStateUpdate?.data?.filter(
+    (item) => !userIdTestResultList?.includes(item?.payloadJson.userId),
+  );
 
   return (
     <div
@@ -39,7 +44,7 @@ function PresenterViewComponent(props: PresenterViewComponentProps) {
     >
       <h1>Answers of each student</h1>
       <Styled.H5pGridWrapper>
-        {mapObject(h5pLatestStateUpdate?.data, jsonContent)}
+        {mapObject(dataToBeRendered, jsonContent)}
       </Styled.H5pGridWrapper>
     </div>
   );

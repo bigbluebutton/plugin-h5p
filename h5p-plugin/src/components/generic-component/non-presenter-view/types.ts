@@ -4,7 +4,7 @@ import { TestResult, UserH5pCurrentState } from '../types';
 
 export interface NonPresenterViewComponentProps {
   jsonContent: string;
-  testResultDispatcher: PushEntryFunction<TestResult>;
+  pushEntryTestResult: PushEntryFunction<TestResult>;
   currentUserId: string;
   pushH5pCurrentState: PushEntryFunction<UserH5pCurrentState>;
   lastUpdateId: string;
