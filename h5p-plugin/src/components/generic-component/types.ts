@@ -2,7 +2,7 @@ import { CurrentUserData } from 'bigbluebutton-html-plugin-sdk';
 
 export interface UserH5pCurrentState {
   userId: string;
-  currentState: object;
+  currentState: string;
 }
 
 export interface GenericContentRenderFunctionProps {

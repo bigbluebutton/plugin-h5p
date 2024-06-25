@@ -12,7 +12,8 @@ const mapObject = (
   currentUserH5pStateList?.map((item) => (
     <H5pPlayerManagerComponent
       key={item.payloadJson.userId}
-      currentH5pStateToBeApplied={item.payloadJson.currentState}
+      currentH5pStateToBeApplied={(item.payloadJson.currentState)
+        ? JSON.parse(item.payloadJson.currentState) : {}}
       jsonContent={jsonContent}
     />
   ))

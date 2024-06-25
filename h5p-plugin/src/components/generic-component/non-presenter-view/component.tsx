@@ -41,15 +41,16 @@ function NonPresenterViewComponent(props: NonPresenterViewComponentProps) {
     if (pushH5pCurrentState
       && h5pState
       && Object.keys(h5pState).length !== 0 && replaceH5pCurrentState) {
+      const currentState = JSON.stringify(h5pState);
       if (lastUpdateId) {
         replaceH5pCurrentState(lastUpdateId, {
           userId: currentUserId,
-          currentState: h5pState,
+          currentState,
         });
       } else {
         pushH5pCurrentState({
           userId: currentUserId,
-          currentState: h5pState,
+          currentState,
         });
       }
     }
