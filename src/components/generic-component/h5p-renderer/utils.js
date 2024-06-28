@@ -9,6 +9,7 @@ export const renderH5p = (
   setH5pState,
   jsonContent,
   setContentRendered,
+  customCss,
 ) => async () => {
   const el = containerRef.current;
 
@@ -31,8 +32,8 @@ export const renderH5p = (
           {
             state: JSON.stringify(previousState),
           }],
-        // embedType: (readOnly) ? 'div' : 'iframe',
         contentAsJson: jsonContent.replace(/(\r\n|\n|\r)/gm, ''),
+        customCss,
         h5pJsonPath: 'https://bigbluebutton.nyc3.digitaloceanspaces.com/plugins/h5p/assets',
         frameJs: 'https://bigbluebutton.nyc3.digitaloceanspaces.com/plugins/h5p/assets/frame.bundle.js',
         frameCss: 'https://bigbluebutton.nyc3.digitaloceanspaces.com/plugins/h5p/assets/styles/h5p.css',
@@ -68,6 +69,7 @@ export const renderH5pForPresenter = (
   currentH5pStateToBeApplied,
   jsonContent,
   setContentRendered,
+  customCss,
 ) => renderH5p(
   containerRef,
   true,
@@ -76,4 +78,5 @@ export const renderH5pForPresenter = (
   () => {},
   jsonContent,
   setContentRendered,
+  customCss,
 );

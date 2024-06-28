@@ -21,7 +21,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
+        exclude: /node_modules|lib\/h5p-standalone/,
         use: {
           loader: 'babel-loader',
         },
@@ -33,7 +33,7 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules|lib\/h5p-standalone/,
       },
     ],
   },

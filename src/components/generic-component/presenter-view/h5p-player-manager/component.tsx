@@ -7,6 +7,7 @@ import H5pPresenterComponent from '../h5p-presenter-component/component';
 export function H5pPlayerManagerComponent(props: H5pPlayerManagerComponentProps) {
   const {
     jsonContent,
+    userName,
     currentH5pStateToBeApplied,
   } = props;
   const [latestH5pStates, setLatestH5pStates] = useState<LatestH5pStateItem[]>([]);
@@ -24,7 +25,10 @@ export function H5pPlayerManagerComponent(props: H5pPlayerManagerComponentProps)
   }, [currentH5pStateToBeApplied]);
 
   return (
-    <div>
+    <div
+      style={{ minWidth: '100%' }}
+    >
+      <h2>{userName}</h2>
       {[...latestH5pStates].filter(
         (state, index) => !state.rendered
         || index === latestH5pStates.length - 1

@@ -61,6 +61,7 @@ export function GenericContentRenderFunction(props: GenericContentRenderFunction
       )
       : (
         <NonPresenterViewComponent
+          currentUserName={currentUser?.name}
           currentUserId={currentUser?.userId}
           jsonContent={jsonContent}
           pushEntryTestResult={pushEntryTestResult}

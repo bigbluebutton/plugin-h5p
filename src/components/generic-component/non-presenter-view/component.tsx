@@ -15,7 +15,7 @@ function NonPresenterViewComponent(props: NonPresenterViewComponentProps) {
   const [contentRendered, setContentRendered] = useState(false);
   const [h5pState, setH5pState] = useState({});
   const {
-    jsonContent,
+    jsonContent, currentUserName,
     pushEntryTestResult, currentUserId,
     pushH5pCurrentState, lastUpdateId, lastPayloadJson,
     replaceH5pCurrentState,
@@ -32,7 +32,7 @@ function NonPresenterViewComponent(props: NonPresenterViewComponentProps) {
           userId: currentUserId,
           testResultObject: score,
           testResultMaximumScore: maxScore,
-        });
+        }, { analytics: true });
       }
     }
   };
@@ -44,11 +44,13 @@ function NonPresenterViewComponent(props: NonPresenterViewComponentProps) {
       const currentState = JSON.stringify(h5pState);
       if (lastUpdateId) {
         replaceH5pCurrentState(lastUpdateId, {
+          userName: currentUserName,
           userId: currentUserId,
           currentState,
         });
       } else {
         pushH5pCurrentState({
+          userName: currentUserName,
           userId: currentUserId,
           currentState,
         });

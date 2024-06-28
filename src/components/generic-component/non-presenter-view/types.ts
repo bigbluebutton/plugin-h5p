@@ -3,6 +3,7 @@ import { PushEntryFunction } from 'bigbluebutton-html-plugin-sdk';
 import { TestResult, UserH5pCurrentState } from '../types';
 
 export interface NonPresenterViewComponentProps {
+  currentUserName: string;
   jsonContent: string;
   pushEntryTestResult: PushEntryFunction<TestResult>;
   currentUserId: string;

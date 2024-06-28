@@ -12,6 +12,7 @@ const mapObject = (
   currentUserH5pStateList?.map((item) => (
     <H5pPlayerManagerComponent
       key={item.payloadJson.userId}
+      userName={item.payloadJson.userName}
       currentH5pStateToBeApplied={(item.payloadJson.currentState)
         ? JSON.parse(item.payloadJson.currentState) : {}}
       jsonContent={jsonContent}
@@ -43,10 +44,9 @@ function PresenterViewComponent(props: PresenterViewComponentProps) {
         }
       }
     >
-      <h1>Answers of each student</h1>
-      <Styled.H5pGridWrapper>
+      <Styled.H5pWrapper>
         {mapObject(dataToBeRendered, jsonContent)}
-      </Styled.H5pGridWrapper>
+      </Styled.H5pWrapper>
     </div>
   );
 }

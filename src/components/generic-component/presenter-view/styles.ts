@@ -11,9 +11,12 @@ const ListItemRender = styled.div`
   }
 `;
 
-const H5pGridWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, max(64px, 100%/3)), 1fr));
+const H5pWrapper = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
 `;
 
-export { ListItemRender, H5pGridWrapper };
+export { ListItemRender, H5pWrapper };

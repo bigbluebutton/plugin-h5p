@@ -1,5 +1,6 @@
 export interface H5pPlayerManagerComponentProps {
   currentH5pStateToBeApplied: object;
+  userName: string
   jsonContent: string;
 }
 
