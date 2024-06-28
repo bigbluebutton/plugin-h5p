@@ -32,7 +32,7 @@ function NonPresenterViewComponent(props: NonPresenterViewComponentProps) {
           userId: currentUserId,
           testResultObject: score,
           testResultMaximumScore: maxScore,
-        }, { analytics: true });
+        });
       }
     }
   };
