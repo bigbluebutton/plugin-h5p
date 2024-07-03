@@ -4,7 +4,6 @@ import { renderH5pForPresenter } from '../../h5p-renderer/utils';
 import * as Styled from '../../styles';
 import { H5pPresenterComponentProps } from './types';
 import { CurrentH5pStateWindow } from '../../../../commons/types';
-import './custom-crossword.css';
 
 declare const window: CurrentH5pStateWindow;
 
@@ -14,7 +13,7 @@ function H5pPresenterComponent(props: H5pPresenterComponentProps) {
   const [contentRendered, setContentRendered] = useState(false);
 
   const {
-    jsonContent,
+    contentAsJson, h5pAsJson,
     currentH5pStateToBeApplied,
     setLatestH5pStates, idOfCurrentState,
   } = props;
@@ -39,7 +38,8 @@ function H5pPresenterComponent(props: H5pPresenterComponentProps) {
       renderH5pForPresenter(
         containerRef,
         currentH5pStateToBeApplied,
-        jsonContent,
+        contentAsJson,
+        h5pAsJson,
         setContentRendered,
         ['https://bigbluebutton.nyc3.digitaloceanspaces.com/plugins/h5p/assets/custom/css/custom-crossword.css'],
       ),

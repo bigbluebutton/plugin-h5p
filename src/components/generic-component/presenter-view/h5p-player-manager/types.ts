@@ -1,9 +1,10 @@
 export interface H5pPlayerManagerComponentProps {
-  currentH5pStateToBeApplied: object;
   userName: string
-  jsonContent: string;
+  contentAsJson: string;
+  h5pAsJson: string;
+  currentH5pStateToBeApplied: object;
+  userId: string;
 }
-
 export interface LatestH5pStateItem {
   id: string;
   state: object;

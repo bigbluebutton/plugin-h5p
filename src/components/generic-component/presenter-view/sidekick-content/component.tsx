@@ -3,6 +3,8 @@ import { BbbPluginSdk, DataChannelTypes } from 'bigbluebutton-html-plugin-sdk';
 import { PresenterViewerRenderFunctionProps } from './types';
 import * as Styled from './styles';
 import { MoreInfoUser, TestResult } from '../../types';
+import { extractH5pContents } from '../../../h5p-plugin/utils';
+import { H5pAsJsonObject } from '../../../../commons/types';
 
 const mapObject = (results: TestResult[], usersList: MoreInfoUser[], presenterId: string) => (
   usersList?.map((item) => {
@@ -30,7 +32,7 @@ const mapObject = (results: TestResult[], usersList: MoreInfoUser[], presenterId
 
 function PresenterViewerSidekickRenderResultFunction(props: PresenterViewerRenderFunctionProps) {
   const {
-    usersList, currentUserId, pluginUuid,
+    usersList, currentUserId, pluginUuid, h5pContentText,
   } = props;
   const pluginApi = BbbPluginSdk.getPluginApi(pluginUuid);
 
@@ -40,6 +42,15 @@ function PresenterViewerSidekickRenderResultFunction(props: PresenterViewerRende
     testResultObject: data.payloadJson.testResultObject,
     testResultMaximumScore: data.payloadJson.testResultMaximumScore,
   } as TestResult));
+
+  let sidekickAreaTitle: string = 'No h5p content is playing';
+
+  if (h5pContentText) {
+    const { h5pAsJson } = extractH5pContents(h5pContentText);
+    const h5pAsObject: H5pAsJsonObject = JSON.parse(h5pAsJson);
+    sidekickAreaTitle = h5pAsObject.title;
+  }
+
   return (
     <div
       id="h5p-container"
@@ -52,7 +63,7 @@ function PresenterViewerSidekickRenderResultFunction(props: PresenterViewerRende
         }
       }
     >
-      <h1>Results of each student</h1>
+      <h1>{sidekickAreaTitle}</h1>
       {mapObject(restults, usersList, currentUserId)}
     </div>
   );

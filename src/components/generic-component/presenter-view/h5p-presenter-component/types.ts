@@ -1,7 +1,8 @@
 import { LatestH5pStateItem } from '../h5p-player-manager/types';
 
 export interface H5pPresenterComponentProps {
-  jsonContent: string;
+  contentAsJson: string;
+  h5pAsJson: string;
   indexOfCurrentStateInList: number;
   stateListLength: number;
   currentH5pStateToBeApplied: object;

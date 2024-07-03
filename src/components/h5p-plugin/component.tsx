@@ -177,7 +177,7 @@ function H5pPlugin(
           root.render(
             <React.StrictMode>
               <GenericContentRenderFunction
-                jsonContent={contentJson}
+                h5pContentText={contentJson}
                 currentUser={currentUser}
                 pluginUuid={uuid}
               />
@@ -198,6 +198,7 @@ function H5pPlugin(
             <React.StrictMode>
               <PresenterViewerSidekickRenderResultFunction
                 currentUserId={currentUser.userId}
+                h5pContentText={contentJson}
                 pluginUuid={uuid}
                 usersList={usersList}
               />

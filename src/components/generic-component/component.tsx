@@ -8,15 +8,17 @@ import { useEffect } from 'react';
 import * as React from 'react';
 import {
   GenericContentRenderFunctionProps,
+  LADTestResult,
   TestResult, UserH5pCurrentState, UsersMoreInformationGraphqlResponse,
 } from './types';
 import NonPresenterViewComponent from './non-presenter-view/component';
 import PresenterViewComponent from './presenter-view/component';
 import { USERS_MORE_INFORMATION } from './subscriptions';
+import { extractH5pContents } from '../h5p-plugin/utils';
 
 export function GenericContentRenderFunction(props: GenericContentRenderFunctionProps) {
   const {
-    jsonContent, currentUser,
+    h5pContentText, currentUser,
     pluginUuid,
   } = props;
 
@@ -32,7 +34,8 @@ export function GenericContentRenderFunction(props: GenericContentRenderFunction
 
   // TODO: Refactor the test results to be just a request done for an external server to be
   // validated and all
-  const { data: testResult, pushEntry: pushEntryTestResult } = pluginApi.useDataChannel<TestResult>('testResult', DataChannelTypes.LATEST_ITEM);
+  const { pushEntry: pushEntryTestResult } = pluginApi.useDataChannel<TestResult>('testResult', DataChannelTypes.LATEST_ITEM);
+  const { pushEntry: pushEntryLadTestResult } = pluginApi.useDataChannel<LADTestResult>('testResult', DataChannelTypes.LATEST_ITEM, 'learning-analytics-dashboard');
 
   useEffect(() => () => {
     if (currentUser && currentUser.presenter) deleteUserH5pCurrentStateList([RESET_DATA_CHANNEL]);
@@ -46,6 +49,8 @@ export function GenericContentRenderFunction(props: GenericContentRenderFunction
     (h5pState) => h5pState.payloadJson.userId === currentUser?.userId,
   ).map((h5pState) => ({ entryId: h5pState.entryId, payloadJson: h5pState.payloadJson }))[0];
 
+  const { contentAsJson, h5pAsJson } = extractH5pContents(h5pContentText);
+
   // TODO: Filter the ones where the loading is not done yet (needs refactor in html5)
   // if (responseUserH5pCurrentStateList.loading) return null;
   return (
@@ -53,18 +58,20 @@ export function GenericContentRenderFunction(props: GenericContentRenderFunction
       ? (
         <PresenterViewComponent
           currentUserId={currentUser?.userId}
-          testResult={testResult}
           usersList={usersList}
           h5pLatestStateUpdate={responseUserH5pCurrentStateList}
-          jsonContent={jsonContent}
+          contentAsJson={contentAsJson}
+          h5pAsJson={h5pAsJson}
         />
       )
       : (
         <NonPresenterViewComponent
           currentUserName={currentUser?.name}
           currentUserId={currentUser?.userId}
-          jsonContent={jsonContent}
+          contentAsJson={contentAsJson}
+          h5pAsJson={h5pAsJson}
           pushEntryTestResult={pushEntryTestResult}
+          pushEntryLadTestResult={pushEntryLadTestResult}
           pushH5pCurrentState={pushUserH5pCurrentStateList}
           lastUpdateId={responseObject?.entryId}
           lastPayloadJson={responseObject?.payloadJson}

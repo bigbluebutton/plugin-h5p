@@ -7,28 +7,28 @@ import { H5pPlayerManagerComponent } from './h5p-player-manager/component';
 
 const mapObject = (
   currentUserH5pStateList: DataChannelEntryResponseType<UserH5pCurrentState>[],
-  jsonContent: string,
+  contentAsJson: string,
+  h5pAsJson: string,
 ) => (
   currentUserH5pStateList?.map((item) => (
     <H5pPlayerManagerComponent
       key={item.payloadJson.userId}
+      userId={item.payloadJson.userId}
       userName={item.payloadJson.userName}
+      contentAsJson={contentAsJson}
       currentH5pStateToBeApplied={(item.payloadJson.currentState)
         ? JSON.parse(item.payloadJson.currentState) : {}}
-      jsonContent={jsonContent}
+      h5pAsJson={h5pAsJson}
     />
   ))
 );
 
 function PresenterViewComponent(props: PresenterViewComponentProps) {
   const {
-    h5pLatestStateUpdate, jsonContent, testResult,
+    h5pLatestStateUpdate, contentAsJson, h5pAsJson,
   } = props;
 
-  const userIdTestResultList = testResult?.data?.map((item) => item.payloadJson.userId);
-  const dataToBeRendered = h5pLatestStateUpdate?.data?.filter(
-    (item) => !userIdTestResultList?.includes(item?.payloadJson.userId),
-  );
+  const dataToBeRendered = h5pLatestStateUpdate?.data;
 
   return (
     <div
@@ -45,7 +45,7 @@ function PresenterViewComponent(props: PresenterViewComponentProps) {
       }
     >
       <Styled.H5pWrapper>
-        {mapObject(dataToBeRendered, jsonContent)}
+        {mapObject(dataToBeRendered, contentAsJson, h5pAsJson)}
       </Styled.H5pWrapper>
     </div>
   );
