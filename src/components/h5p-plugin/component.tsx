@@ -140,6 +140,7 @@ function H5pPlugin(
         onClick: () => {
           jsonContentPushFunction({ contentJson: currentText, link: linkThatGeneratedJsonContent });
         },
+        style: { background: '#54a1f3', color: '#fff' },
       });
       pluginApi.setPresentationToolbarItems([currentObjectToSendToClient]);
 

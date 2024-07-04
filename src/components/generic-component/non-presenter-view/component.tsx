@@ -18,7 +18,7 @@ function NonPresenterViewComponent(props: NonPresenterViewComponentProps) {
     contentAsJson, currentUserName, h5pAsJson,
     pushEntryTestResult, pushEntryLadTestResult, currentUserId,
     pushH5pCurrentState, lastUpdateId, lastPayloadJson,
-    replaceH5pCurrentState,
+    replaceH5pCurrentState, pluginApi,
   } = props;
 
   const h5pAsJsonObject: H5pAsJsonObject = JSON.parse(h5pAsJson);
@@ -31,11 +31,9 @@ function NonPresenterViewComponent(props: NonPresenterViewComponentProps) {
       const maxScore = event.getMaxScore();
       const verb = event.getVerb();
       if (verb === 'answered') {
-        pushEntryLadTestResult({
+        pluginApi.sendDataAnalytics({
           learningAnalyticsDashboardColumnTitle: h5pAsJsonObject.title,
           learningAnalyticsDashboardValue: `${(parseFloat(score) / parseFloat(maxScore)) * 10}`,
-        }, {
-          analytics: true,
         });
         pushEntryTestResult({
           testResultActivityTitle: h5pAsJsonObject.title,

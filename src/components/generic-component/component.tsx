@@ -66,6 +66,7 @@ export function GenericContentRenderFunction(props: GenericContentRenderFunction
       )
       : (
         <NonPresenterViewComponent
+          pluginApi={pluginApi}
           currentUserName={currentUser?.name}
           currentUserId={currentUser?.userId}
           contentAsJson={contentAsJson}
