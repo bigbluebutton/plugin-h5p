@@ -31,9 +31,10 @@ function NonPresenterViewComponent(props: NonPresenterViewComponentProps) {
       const maxScore = event.getMaxScore();
       const verb = event.getVerb();
       if (verb === 'answered') {
-        pluginApi.sendDataAnalytics({
-          learningAnalyticsDashboardColumnTitle: h5pAsJsonObject.title,
-          learningAnalyticsDashboardValue: `${(parseFloat(score) / parseFloat(maxScore)) * 10}`,
+        pluginApi.sendGenericDataForLearningAnalyticsDashboard({
+          columnTitle: h5pAsJsonObject.title,
+          value: `${(parseFloat(score) / parseFloat(maxScore)) * 10.0} / 10`,
+          cardTitle: 'H5P',
         });
         pushEntryTestResult({
           testResultActivityTitle: h5pAsJsonObject.title,
