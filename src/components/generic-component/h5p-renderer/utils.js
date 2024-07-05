@@ -7,7 +7,8 @@ export const renderH5p = (
   currentH5pStateToBeApplied,
   lastPayloadJson,
   setH5pState,
-  jsonContent,
+  contentAsJson,
+  h5pAsJson,
   setContentRendered,
   customCss,
 ) => async () => {
@@ -32,7 +33,8 @@ export const renderH5p = (
           {
             state: JSON.stringify(previousState),
           }],
-        contentAsJson: jsonContent.replace(/(\r\n|\n|\r)/gm, ''),
+        contentAsJson: contentAsJson.replace(/(\r\n|\n|\r)/gm, ''),
+        h5pAsJson: h5pAsJson.replace(/(\r\n|\n|\r)/gm, ''),
         customCss,
         h5pJsonPath: 'https://bigbluebutton.nyc3.digitaloceanspaces.com/plugins/h5p/assets',
         frameJs: 'https://bigbluebutton.nyc3.digitaloceanspaces.com/plugins/h5p/assets/frame.bundle.js',
@@ -52,7 +54,8 @@ export const renderH5pForNonPresenter = (
   containerRef,
   lastPayloadJson,
   setH5pState,
-  jsonContent,
+  contentAsJson,
+  h5pAsJson,
   setContentRendered,
 ) => renderH5p(
   containerRef,
@@ -60,14 +63,16 @@ export const renderH5pForNonPresenter = (
   undefined,
   lastPayloadJson,
   setH5pState,
-  jsonContent,
+  contentAsJson,
+  h5pAsJson,
   setContentRendered,
 );
 
 export const renderH5pForPresenter = (
   containerRef,
   currentH5pStateToBeApplied,
-  jsonContent,
+  contentAsJson,
+  h5pAsJson,
   setContentRendered,
   customCss,
 ) => renderH5p(
@@ -76,7 +81,8 @@ export const renderH5pForPresenter = (
   currentH5pStateToBeApplied,
   '',
   () => {},
-  jsonContent,
+  contentAsJson,
+  h5pAsJson,
   setContentRendered,
   customCss,
 );

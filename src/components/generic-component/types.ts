@@ -7,15 +7,21 @@ export interface UserH5pCurrentState {
 }
 
 export interface GenericContentRenderFunctionProps {
-  jsonContent: string;
+  h5pContentText: string;
   currentUser: CurrentUserData;
   pluginUuid: string;
 }
 
 export interface TestResult {
   userId: string;
+  testResultActivityTitle: string;
   testResultObject: number;
   testResultMaximumScore: number;
+}
+
+export interface LADTestResult {
+  learningAnalyticsDashboardColumnTitle: string;
+  learningAnalyticsDashboardValue: string;
 }
 
 export interface MoreInfoUser {

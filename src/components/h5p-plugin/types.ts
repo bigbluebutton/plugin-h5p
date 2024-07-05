@@ -3,6 +3,12 @@ interface H5pPluginProps {
     pluginUuid: string,
 }
 
+interface H5pContents {
+  contentAsJson: string;
+  h5pAsJson: string;
+}
+
 export {
   H5pPluginProps,
+  H5pContents,
 };

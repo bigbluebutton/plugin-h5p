@@ -6,7 +6,7 @@ import H5pPresenterComponent from '../h5p-presenter-component/component';
 
 export function H5pPlayerManagerComponent(props: H5pPlayerManagerComponentProps) {
   const {
-    jsonContent,
+    contentAsJson, h5pAsJson,
     userName,
     currentH5pStateToBeApplied,
   } = props;
@@ -41,7 +41,8 @@ export function H5pPlayerManagerComponent(props: H5pPlayerManagerComponentProps)
           setLatestH5pStates={setLatestH5pStates}
           currentH5pStateToBeApplied={state.state}
           idOfCurrentState={state.id}
-          jsonContent={jsonContent}
+          contentAsJson={contentAsJson}
+          h5pAsJson={h5pAsJson}
         />
       ))}
     </div>
