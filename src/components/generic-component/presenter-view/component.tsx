@@ -25,11 +25,15 @@ const mapObject = (
 
 function PresenterViewComponent(props: PresenterViewComponentProps) {
   const {
+    currentUserId,
     h5pLatestStateUpdate, contentAsJson, h5pAsJson,
   } = props;
 
-  const dataToBeRendered = h5pLatestStateUpdate?.data;
+  const dataToBeRendered = h5pLatestStateUpdate?.data?.filter(
+    (item) => item.payloadJson.userId !== currentUserId,
+  );
 
+  console.log('Debug log to see if any unwanted data gets passed here: ', dataToBeRendered);
   return (
     <div
       id="h5p-container"

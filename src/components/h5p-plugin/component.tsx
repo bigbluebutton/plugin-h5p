@@ -86,7 +86,10 @@ function H5pPlugin(
         if (match && match.length > 0) {
           const longest = match.sort((a, b) => b.length - a.length);
           const indexOfH5P = longest[0].indexOf('H5P');
-          const jsonContent = longest[0].substring(indexOfH5P + 3).replace(/(\r\n|\n|\r)/gm, '');
+          const jsonContentWithlinebreaks = longest[0].substring(indexOfH5P + 3);
+          const jsonContent = jsonContentWithlinebreaks.replace(/-(\r\n|\n|\r)/gm, '-')
+            .replace(/(\r\n|\n|\r)\./gm, '.').replace(/(\r\n|\n|\r)/gm, ' ');
+          console.log('Debug log to see what comes from the slide text ', jsonContentWithlinebreaks, '\n------\n', jsonContent, JSON.parse(jsonContent));
           if (isValidJSON(jsonContent)) {
             setLinkThatGeneratedJsonContent(currentTxtUri);
             setCurrentText(jsonContent);

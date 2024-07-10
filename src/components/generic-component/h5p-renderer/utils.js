@@ -33,8 +33,8 @@ export const renderH5p = (
           {
             state: JSON.stringify(previousState),
           }],
-        contentAsJson: contentAsJson.replace(/(\r\n|\n|\r)/gm, ''),
-        h5pAsJson: h5pAsJson.replace(/(\r\n|\n|\r)/gm, ''),
+        contentAsJson,
+        h5pAsJson,
         customCss,
         h5pJsonPath: 'https://bigbluebutton.nyc3.digitaloceanspaces.com/plugins/h5p/assets',
         frameJs: 'https://bigbluebutton.nyc3.digitaloceanspaces.com/plugins/h5p/assets/frame.bundle.js',
