@@ -1,0 +1,12 @@
+Package: bbb-plugin-template
+Version: 0.1.0
+Architecture: all
+Maintainer: Anton Georgiev <anton.georgiev@blindsidenetworks.com>
+Installed-Size: 252
+Section: web
+Priority: extra
+Homepage: https://github.com/bigbluebutton/plugin-template
+Description: Share a webpage with all session participants
+ An official BigBlueButton plugin which allows
+ the presenter to display a web page to
+ all viewers inside of a session.

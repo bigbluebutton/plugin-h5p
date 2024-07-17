@@ -1,0 +1,9 @@
+node_modules
+dist
+debian/.debhelper/
+debian/debhelper-build-stamp
+debian/files
+debian/**/copyright
+debian/**/changelog.gz
+debian/**/md5sums
+debian/**/var/www/*
