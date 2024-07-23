@@ -1,12 +1,12 @@
-Source: bbb-plugin-template
+Source: bbb-plugin-h5p
 Section: web
 Priority: extra
 Maintainer: Anton Georgiev <anton.georgiev@blindsidenetworks.com>
-Build-Depends: debhelper (>= 13), nodejs (>= 18)
+Build-Depends: debhelper (>= 13), nodejs (>= 18), unzip
 Standards-Version: 4.1.4
-Homepage: https://github.com/bigbluebutton/plugin-template
+Homepage: https://github.com/bigbluebutton/plugin-h5p
 
-Package: bbb-plugin-template
+Package: bbb-plugin-h5p
 Architecture: all
 Depends: ${misc:Depends}, nodejs
 Description: Share a webpage with all session participants
