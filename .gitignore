@@ -2,3 +2,10 @@ node_modules/
 dist/
 lib/h5p-standalone/
 libraries.h5p
+debian/.debhelper/
+debian/debhelper-build-stamp
+debian/files
+debian/**/copyright
+debian/**/changelog.gz
+debian/**/md5sums
+debian/**/var/www/*
