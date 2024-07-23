@@ -28,7 +28,7 @@ The `fetch-dependencies` script is responsible for cloning the `bigbluebutton/h5
       dataChannels:
         - name: jsonContent
           pushPermission: ['moderator','presenter']
-          replaceOrDeletePermission: ['moderator', 'crerator']
+          replaceOrDeletePermission: ['moderator', 'crerator', 'presenter']
         - name: testResult
           pushPermission: ['all']
           replaceOrDeletePermission: ['moderator', 'creator']
@@ -59,7 +59,7 @@ public:
       dataChannels:
         - name: jsonContent
           pushPermission: ['moderator','presenter']
-          replaceOrDeletePermission: ['moderator', 'creator']
+          replaceOrDeletePermission: ['moderator', 'creator', 'presenter']
         - name: testResult
           pushPermission: ['all']
           replaceOrDeletePermission: ['moderator', 'creator']

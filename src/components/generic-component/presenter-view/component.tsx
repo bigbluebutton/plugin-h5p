@@ -1,3 +1,4 @@
+import { pluginLogger } from 'bigbluebutton-html-plugin-sdk';
 import { DataChannelEntryResponseType } from 'bigbluebutton-html-plugin-sdk/dist/cjs/data-channel/types';
 import * as React from 'react';
 import { PresenterViewComponentProps } from './types';
@@ -25,11 +26,15 @@ const mapObject = (
 
 function PresenterViewComponent(props: PresenterViewComponentProps) {
   const {
+    currentUserId,
     h5pLatestStateUpdate, contentAsJson, h5pAsJson,
   } = props;
 
-  const dataToBeRendered = h5pLatestStateUpdate?.data;
+  const dataToBeRendered = h5pLatestStateUpdate?.data?.filter(
+    (item) => item.payloadJson.userId !== currentUserId,
+  );
 
+  pluginLogger.debug(`Debug log from Presenter View Component (Showing dataToBeRendered): ${dataToBeRendered}`);
   return (
     <div
       id="h5p-container"

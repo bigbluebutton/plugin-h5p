@@ -1,0 +1,380 @@
+{
+  "FontAwesome": {
+    "id": "FontAwesome",
+    "title": "Font Awesome",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/font-awesome"
+    },
+    "resume": false,
+    "majorVersion": 4,
+    "minorVersion": 5,
+    "patchVersion": 6,
+    "fullscreen": false,
+    "author": "Dave Gandy",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5P.AdvancedText": {
+    "id": "H5P.AdvancedText",
+    "title": "Text",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/h5p-advanced-text"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 1,
+    "patchVersion": 16,
+    "fullscreen": false,
+    "author": "H5P Group",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5P.Crossword": {
+    "id": "H5P.Crossword",
+    "title": "Crossword",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/otacke/h5p-crossword"
+    },
+    "resume": false,
+    "majorVersion": 0,
+    "minorVersion": 5,
+    "patchVersion": 11,
+    "fullscreen": false,
+    "author": "Language Training Center GmbH, Oliver Tacke",
+    "runnable": true,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5P.DragNBar": {
+    "id": "H5P.DragNBar",
+    "title": "Drag N Bar",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/h5p-drag-n-bar"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 5,
+    "patchVersion": 22,
+    "fullscreen": false,
+    "author": "H5P Group",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5P.DragNDrop": {
+    "id": "H5P.DragNDrop",
+    "title": "Drag N Drop",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/h5p-drag-n-drop"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 1,
+    "patchVersion": 5,
+    "fullscreen": false,
+    "author": "H5P Group",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5P.DragNResize": {
+    "id": "H5P.DragNResize",
+    "title": "Drag'N Resize",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/h5p-drag-n-resize"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 2,
+    "patchVersion": 5,
+    "fullscreen": false,
+    "author": "H5P Group",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5P.DragQuestion": {
+    "id": "H5P.DragQuestion",
+    "title": "Drag and Drop",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/h5p-drag-question"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 14,
+    "patchVersion": 21,
+    "fullscreen": false,
+    "author": "H5P Group",
+    "runnable": true,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5P.FontIcons": {
+    "id": "H5P.FontIcons",
+    "title": "H5P.FontIcons",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/h5p-font-icons"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 0,
+    "patchVersion": 6,
+    "fullscreen": false,
+    "author": "H5P Group",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5P.Image": {
+    "id": "H5P.Image",
+    "title": "Image",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/h5p-image"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 1,
+    "patchVersion": 23,
+    "fullscreen": false,
+    "author": "H5P Group",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5P.JoubelUI": {
+    "id": "H5P.JoubelUI",
+    "title": "Joubel UI",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/h5p-joubel-ui"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 3,
+    "patchVersion": 19,
+    "fullscreen": false,
+    "author": "H5P Group",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5P.MaterialDesignIcons": {
+    "id": "H5P.MaterialDesignIcons",
+    "title": "Material Design Icons",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/h5p-material-design-icons"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 0,
+    "patchVersion": 0,
+    "fullscreen": false,
+    "author": "H5P Group",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5P.Question": {
+    "id": "H5P.Question",
+    "title": "Question",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/h5p-question"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 5,
+    "patchVersion": 15,
+    "fullscreen": false,
+    "author": "H5P Group",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5P.Transition": {
+    "id": "H5P.Transition",
+    "title": "Transition",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/h5p-transition"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 0,
+    "patchVersion": 4,
+    "fullscreen": false,
+    "author": "H5P Group",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5PEditor.ColorSelector": {
+    "id": "H5PEditor.ColorSelector",
+    "title": "H5PEditor.ColorSelector",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/h5p-editor-color-selector"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 3,
+    "patchVersion": 1,
+    "fullscreen": false,
+    "author": "H5P Group",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5PEditor.DragQuestion": {
+    "id": "H5PEditor.DragQuestion",
+    "title": "Drag Question Editor",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/h5p-editor-drag-question"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 10,
+    "patchVersion": 21,
+    "fullscreen": false,
+    "author": "H5P Group",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5PEditor.RangeList": {
+    "id": "H5PEditor.RangeList",
+    "title": "H5P Editor Range List",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/h5p-editor-range-list"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 0,
+    "patchVersion": 13,
+    "fullscreen": false,
+    "author": "H5P Group",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5PEditor.ShowWhen": {
+    "id": "H5PEditor.ShowWhen",
+    "title": "Toggle visibility of a field based on rules",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/h5p-editor-show-when"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 0,
+    "patchVersion": 9,
+    "fullscreen": false,
+    "author": "H5P Group",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5PEditor.TableList": {
+    "id": "H5PEditor.TableList",
+    "title": "H5P Editor Table List",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/h5p-editor-table-list"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 0,
+    "patchVersion": 4,
+    "fullscreen": false,
+    "author": "H5P Group",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5PEditor.VerticalTabs": {
+    "id": "H5PEditor.VerticalTabs",
+    "title": "H5P Editor Vertical Tabs",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/h5p-editor-vertical-tabs"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 3,
+    "patchVersion": 8,
+    "fullscreen": false,
+    "author": "H5P Group",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "H5PEditor.Wizard": {
+    "id": "H5PEditor.Wizard",
+    "title": "H5PEditor.Wizard",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/h5p-editor-wizard"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 2,
+    "patchVersion": 17,
+    "fullscreen": false,
+    "author": "H5P Group",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  },
+  "jQuery.ui": {
+    "id": "jQuery.ui",
+    "title": "UI",
+    "repo": {
+      "type": "github",
+      "url": "https://github.com/bigbluebutton/jquery-ui"
+    },
+    "resume": false,
+    "majorVersion": 1,
+    "minorVersion": 10,
+    "patchVersion": 22,
+    "fullscreen": false,
+    "author": "Jupiter",
+    "runnable": false,
+    "xapiVerbs": [
+      "attempted"
+    ]
+  }
+}

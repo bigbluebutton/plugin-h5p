@@ -1,3 +1,4 @@
 node_modules/
 dist/
-lib/
+lib/h5p-standalone/
+libraries.h5p

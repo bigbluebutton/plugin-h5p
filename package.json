@@ -24,7 +24,7 @@
     "build-bundle": "webpack --mode production",
     "start": "webpack serve --mode development",
     "build:watch": "rm -rf dist && tsc -w --module CommonJS",
-    "fetch-dependencies": "git clone https://github.com/bigbluebutton/h5p-standalone.git ../src/lib/",
+    "fetch-standalone": "git clone https://github.com/bigbluebutton/h5p-standalone.git lib/h5p-standalone",
     "lint": "eslint ./src/*",
     "lint:fix": "npm run lint -- --fix",
     "lint:watch": "watch 'yarn lint'"

@@ -33,7 +33,7 @@ function NonPresenterViewComponent(props: NonPresenterViewComponentProps) {
       if (verb === 'answered') {
         pluginApi.sendGenericDataForLearningAnalyticsDashboard({
           columnTitle: h5pAsJsonObject.title,
-          value: `${(parseFloat(score) / parseFloat(maxScore)) * 10.0} / 10`,
+          value: `${parseFloat(score)} / ${parseFloat(maxScore)}`,
           cardTitle: 'H5P',
         });
         pushEntryTestResult({

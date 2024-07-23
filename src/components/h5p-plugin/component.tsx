@@ -23,8 +23,7 @@ import { GenericContentRenderFunction } from '../generic-component/component';
 import { H5pPluginProps } from './types';
 import { isValidJSON } from './utils';
 import PresenterViewerSidekickRenderResultFunction from '../generic-component/presenter-view/sidekick-content/component';
-import { TestResult, UsersMoreInformationGraphqlResponse } from '../generic-component/types';
-import { USERS_MORE_INFORMATION } from '../generic-component/subscriptions';
+import { TestResult } from '../generic-component/types';
 
 interface DataToGenericLink {
   contentJson?: string,
@@ -48,10 +47,6 @@ function H5pPlugin(
   const { data: testResultResponse, deleteEntry: testResultDeleteEntry } = pluginApi.useDataChannel<TestResult>('testResult', DataChannelTypes.All_ITEMS);
   const { deleteEntry: deleteUserH5pCurrentStateList } = pluginApi.useDataChannel<TestResult>('testResult', DataChannelTypes.All_ITEMS, 'userH5pCurrentState');
   const [genericContentId, setGenericContentId] = useState<string>('');
-  const allUsersInfo = pluginApi.useCustomSubscription<UsersMoreInformationGraphqlResponse>(
-    USERS_MORE_INFORMATION,
-  );
-  const usersList = allUsersInfo?.data?.user;
 
   const currentLayout = pluginApi.useUiData(LayoutPresentatioAreaUiDataNames.CURRENT_ELEMENT, [{
     isOpen: true,
@@ -91,7 +86,10 @@ function H5pPlugin(
         if (match && match.length > 0) {
           const longest = match.sort((a, b) => b.length - a.length);
           const indexOfH5P = longest[0].indexOf('H5P');
-          const jsonContent = longest[0].substring(indexOfH5P + 3).replace(/(\r\n|\n|\r)/gm, '');
+          const jsonContentWithlinebreaks = longest[0].substring(indexOfH5P + 3);
+          const jsonContent = jsonContentWithlinebreaks.replace(/-(\r\n|\n|\r)/gm, '-')
+            .replace(/(\r\n|\n|\r)\./gm, '.').replace(/(\r\n|\n|\r)/gm, ' ');
+          pluginLogger.debug(`Debug log to see what comes from the slide text (jsonContentWithlinebreaks): ${jsonContentWithlinebreaks} \n\n (JSON.parse(jsonContent)): `, JSON.parse(jsonContent));
           if (isValidJSON(jsonContent)) {
             setLinkThatGeneratedJsonContent(currentTxtUri);
             setCurrentText(jsonContent);
@@ -201,13 +199,12 @@ function H5pPlugin(
                 currentUserId={currentUser.userId}
                 h5pContentText={contentJson}
                 pluginUuid={uuid}
-                usersList={usersList}
               />
             </React.StrictMode>,
           );
         },
         buttonIcon: 'user',
-        open: false,
+        open: contentJson && contentJson !== '',
       }));
     }
     const genericContentIdList = pluginApi.setGenericContentItems(genericContentList);
