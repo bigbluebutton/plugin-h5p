@@ -36,9 +36,9 @@ export const renderH5p = (
         contentAsJson,
         h5pAsJson,
         customCss,
-        h5pJsonPath: 'https://bigbluebutton.nyc3.digitaloceanspaces.com/plugins/h5p/assets',
-        frameJs: 'https://bigbluebutton.nyc3.digitaloceanspaces.com/plugins/h5p/assets/frame.bundle.js',
-        frameCss: 'https://bigbluebutton.nyc3.digitaloceanspaces.com/plugins/h5p/assets/styles/h5p.css',
+        h5pJsonPath: '/plugins/h5p/',
+        frameJs: '/plugins/h5p/frame.bundle.js',
+        frameCss: '/plugins/h5p/styles/h5p.css',
         assetsRequestFetchOptions: {},
       };
       await new H5P(el, options)

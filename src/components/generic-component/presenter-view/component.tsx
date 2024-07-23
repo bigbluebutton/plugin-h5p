@@ -1,3 +1,4 @@
+import { pluginLogger } from 'bigbluebutton-html-plugin-sdk';
 import { DataChannelEntryResponseType } from 'bigbluebutton-html-plugin-sdk/dist/cjs/data-channel/types';
 import * as React from 'react';
 import { PresenterViewComponentProps } from './types';
@@ -33,7 +34,7 @@ function PresenterViewComponent(props: PresenterViewComponentProps) {
     (item) => item.payloadJson.userId !== currentUserId,
   );
 
-  console.log('Debug log to see if any unwanted data gets passed here: ', dataToBeRendered);
+  pluginLogger.debug(`Debug log from Presenter View Component (Showing dataToBeRendered): ${dataToBeRendered}`);
   return (
     <div
       id="h5p-container"
