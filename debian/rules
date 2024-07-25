@@ -6,10 +6,10 @@
 override_dh_auto_build:
 	if [ ! -f ./libraries.h5p ]; then \
 		echo "ERROR: Please create the libraries.h5p before building the debian package by running:"; \
-		echo "    ./pack_dependencies"; \
+		echo "    ./pack_dependencies.sh"; \
 		exit 1; \
 	fi
-	npm install
+	npm ci
 	npm run build-bundle
 
 override_dh_auto_install:
@@ -20,5 +20,5 @@ override_dh_auto_install:
 	unzip libraries.h5p -d debian/bbb-plugin-h5p/var/www/bigbluebutton-default/assets/plugins/h5p ; \
 	else \
 	echo "Please create the libraries.h5p before building the debian package by running:" ; \
-	echo "		./pack_dependencies" ; \
+	echo "		./pack_dependencies.sh" ; \
 	fi
