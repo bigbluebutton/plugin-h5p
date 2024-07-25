@@ -1,0 +1,14 @@
+Source: bbb-plugin-h5p
+Section: web
+Priority: extra
+Maintainer: Anton Georgiev <anton.georgiev@blindsidenetworks.com>
+Build-Depends: debhelper (>= 13), nodejs (>= 18), unzip
+Standards-Version: 4.1.4
+Homepage: https://github.com/bigbluebutton/plugin-h5p
+
+Package: bbb-plugin-h5p
+Architecture: all
+Depends: ${misc:Depends}, nodejs
+Description: It is an integration for Bigbluebutton with the H5P.
+ It allows the user to play H5P activities within a Bigbluebutton
+ session.
