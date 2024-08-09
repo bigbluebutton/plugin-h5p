@@ -1,6 +1,5 @@
-import { ReplaceEntryFunction } from 'bigbluebutton-html-plugin-sdk/dist/cjs/data-channel/types';
 import { PluginApi, PushEntryFunction } from 'bigbluebutton-html-plugin-sdk';
-import { LADTestResult, TestResult, UserH5pCurrentState } from '../types';
+import { LADTestResult, TestResult } from '../types';
 
 export interface NonPresenterViewComponentProps {
   currentUserName: string;
@@ -9,9 +8,5 @@ export interface NonPresenterViewComponentProps {
   pushEntryTestResult: PushEntryFunction<TestResult>;
   pushEntryLadTestResult: PushEntryFunction<LADTestResult>;
   currentUserId: string;
-  pushH5pCurrentState: PushEntryFunction<UserH5pCurrentState>;
-  lastUpdateId: string;
   pluginApi: PluginApi;
-  lastPayloadJson: UserH5pCurrentState;
-  replaceH5pCurrentState: ReplaceEntryFunction<UserH5pCurrentState>;
 }

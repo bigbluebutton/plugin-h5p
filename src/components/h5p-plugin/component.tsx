@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import {
   ActionButtonDropdownOption,
@@ -47,6 +47,7 @@ function H5pPlugin(
   const { data: testResultResponse, deleteEntry: testResultDeleteEntry } = pluginApi.useDataChannel<TestResult>('testResult', DataChannelTypes.All_ITEMS);
   const { deleteEntry: deleteUserH5pCurrentStateList } = pluginApi.useDataChannel<TestResult>('testResult', DataChannelTypes.All_ITEMS, 'userH5pCurrentState');
   const [genericContentId, setGenericContentId] = useState<string>('');
+  const currentUserPresenterPrevious = useRef<boolean>(currentUser?.presenter);
 
   const currentLayout = pluginApi.useUiData(LayoutPresentatioAreaUiDataNames.CURRENT_ELEMENT, [{
     isOpen: true,
@@ -174,17 +175,21 @@ function H5pPlugin(
         contentFunction: (element: HTMLElement) => {
           const root = ReactDOM.createRoot(element);
           root.render(
-            <React.StrictMode>
-              <GenericContentRenderFunction
-                h5pContentText={contentJson}
-                currentUser={currentUser}
-                pluginUuid={uuid}
-              />
-            </React.StrictMode>,
+            <GenericContentRenderFunction
+              h5pContentText={contentJson}
+              currentUser={currentUser}
+              pluginUuid={uuid}
+            />,
           );
         },
       }));
       mainAreaIsRendering = true;
+    }
+    if (currentUser?.presenter !== currentUserPresenterPrevious.current) {
+      if ((currentUser && !currentUser.presenter) && currentUserPresenterPrevious.current) {
+        deleteUserH5pCurrentStateList([RESET_DATA_CHANNEL]);
+      }
+      currentUserPresenterPrevious.current = currentUser?.presenter;
     }
     if (currentUser?.presenter) {
       previousTestResult.current = JSON.stringify(testResultResponse.data);
@@ -194,13 +199,11 @@ function H5pPlugin(
         contentFunction: (element) => {
           const root = ReactDOM.createRoot(element);
           root.render(
-            <React.StrictMode>
-              <PresenterViewerSidekickRenderResultFunction
-                currentUserId={currentUser.userId}
-                h5pContentText={contentJson}
-                pluginUuid={uuid}
-              />
-            </React.StrictMode>,
+            <PresenterViewerSidekickRenderResultFunction
+              currentUserId={currentUser.userId}
+              h5pContentText={contentJson}
+              pluginUuid={uuid}
+            />,
           );
         },
         buttonIcon: 'user',

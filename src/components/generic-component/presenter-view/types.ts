@@ -1,12 +1,14 @@
-import { GraphqlResponseWrapper } from 'bigbluebutton-html-plugin-sdk';
-import { DataChannelEntryResponseType } from 'bigbluebutton-html-plugin-sdk/dist/cjs/data-channel/types';
-import { MoreInfoUser, UserH5pCurrentState } from '../types';
+import { PluginApi } from 'bigbluebutton-html-plugin-sdk';
+import { MoreInfoUser } from '../types';
 
+export interface UserToBeRendered {
+    userId: string;
+    userName: string;
+}
 export interface PresenterViewComponentProps {
-    currentUserId: string;
+    pluginApi: PluginApi;
+    listOfStudentsToBeRendered: UserToBeRendered[];
     usersList: MoreInfoUser[];
-    h5pLatestStateUpdate: GraphqlResponseWrapper<
-        DataChannelEntryResponseType<UserH5pCurrentState>[]>;
     contentAsJson: string;
     h5pAsJson: string;
 }

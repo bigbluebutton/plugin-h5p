@@ -1,15 +1,14 @@
 import * as React from 'react';
-import { useEffect, useRef, useState } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { renderH5pForPresenter } from '../../h5p-renderer/utils';
-import * as Styled from '../../styles';
 import { H5pPresenterComponentProps } from './types';
-import { CurrentH5pStateWindow } from '../../../../commons/types';
 
-declare const window: CurrentH5pStateWindow;
-
-window.currentH5pState = '';
 function H5pPresenterComponent(props: H5pPresenterComponentProps) {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [contentRendered, setContentRendered] = useState(false);
 
   const {
@@ -20,18 +19,16 @@ function H5pPresenterComponent(props: H5pPresenterComponentProps) {
 
   useEffect(() => {
     if (setLatestH5pStates && contentRendered) {
-      setTimeout(() => {
-        setLatestH5pStates((prev) => {
-          const result = prev.map((state) => {
-            const modifiedState = { ...state };
-            if (state.id === idOfCurrentState) modifiedState.rendered = true;
-            return modifiedState;
-          });
-          return result;
+      setLatestH5pStates((prev) => {
+        const result = prev.map((state) => {
+          const modifiedState = { ...state };
+          if (state.id === idOfCurrentState) modifiedState.rendered = true;
+          return modifiedState;
         });
-      }, 1000);
+        return result;
+      });
     }
-  }, [contentRendered]);
+  }, [contentRendered, setLatestH5pStates, idOfCurrentState]);
 
   useEffect(() => {
     const timeoutReference = setTimeout(
@@ -53,22 +50,24 @@ function H5pPresenterComponent(props: H5pPresenterComponentProps) {
 
   return (
     <div
-      style={{ position: 'relative', width: '100%' }}
+      style={{
+        position: 'relative',
+        width: '100%',
+      }}
     >
       <div
-        id="h5p-container"
-        style={
-          {
-            minWidth: '100%',
-            background: '#F3F6F9',
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-          }
-        }
+        id="h5p-internal-container"
+        style={{
+          minWidth: '100%',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
       >
-        <Styled.ScrollboxVertical
+        <div
           style={{
+            padding: '2px 50px',
+            width: '70%',
             position: 'absolute',
             blockSize: 'fit-content',
           }}

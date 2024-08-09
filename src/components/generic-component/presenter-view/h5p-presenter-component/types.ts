@@ -5,7 +5,7 @@ export interface H5pPresenterComponentProps {
   h5pAsJson: string;
   indexOfCurrentStateInList: number;
   stateListLength: number;
-  currentH5pStateToBeApplied: object;
+  currentH5pStateToBeApplied: string;
   setLatestH5pStates: React.Dispatch<React.SetStateAction<LatestH5pStateItem[]>>;
   idOfCurrentState: string;
 }

@@ -15,7 +15,7 @@ const H5pWrapper = styled.div`
   display: flex;
   height: 100%;
   width: 100%;
-  overflow-x: scroll;
+  overflow-x: auto;
   overflow-y: hidden;
 `;
 
