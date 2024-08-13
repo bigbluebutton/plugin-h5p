@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { DataChannelTypes } from 'bigbluebutton-html-plugin-sdk';
 import { useEffect, useRef, useState } from 'react';
-import { renderH5pForNonPresenter } from '../h5p-renderer/utils';
+import { renderH5pForNonPresenter } from '../../../h5p-renderer/utils';
 import { NonPresenterViewComponentProps } from './types';
-import * as Styled from '../styles';
+import * as Styled from './styles';
 import { CurrentH5pStateWindow, H5pAsJsonObject } from '../../../commons/types';
 import { UserH5pCurrentState } from '../types';
 

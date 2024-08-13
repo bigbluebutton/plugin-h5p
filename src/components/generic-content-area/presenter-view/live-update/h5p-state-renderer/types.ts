@@ -1,4 +1,4 @@
-import { LatestH5pStateItem } from '../h5p-player-manager/types';
+import { LatestH5pStateItem } from '../live-update-player/types';
 
 export interface H5pPresenterComponentProps {
   contentAsJson: string;

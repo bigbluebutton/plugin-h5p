@@ -14,7 +14,7 @@ import {
 import NonPresenterViewComponent from './non-presenter-view/component';
 import PresenterViewComponent from './presenter-view/component';
 import { USERS_MORE_INFORMATION } from './subscriptions';
-import { extractH5pContents } from '../h5p-plugin/utils';
+import { extractH5pContents } from '../plugin-manager/utils';
 import { UserToBeRendered } from './presenter-view/types';
 
 export function GenericContentRenderFunction(props: GenericContentRenderFunctionProps) {

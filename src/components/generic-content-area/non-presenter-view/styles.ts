@@ -41,16 +41,4 @@ const ScrollboxVertical = styled.div`
   &::-webkit-scrollbar-corner { background: 0 0; }
 `;
 
-const LockedDiv = styled.div`
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: absolute;
-  z-index: 100;
-  &:hover {
-    cursor: not-allowed;
-  }
-`;
-
-export { ScrollboxVertical, LockedDiv };
+export { ScrollboxVertical };

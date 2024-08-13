@@ -2,14 +2,15 @@ import * as React from 'react';
 import { DataChannelTypes } from 'bigbluebutton-html-plugin-sdk';
 import * as uuidLib from 'uuid';
 import { useEffect, useState } from 'react';
-import { H5pPlayerManagerComponentProps, LatestH5pStateItem } from './types';
-import H5pPresenterComponent from '../h5p-presenter-component/component';
-import { UserH5pCurrentState } from '../../types';
+import { LiveUpdatePlayerComponentProps, LatestH5pStateItem } from './types';
+import H5pStateRendererComponent from '../h5p-state-renderer/component';
+import * as Styled from './styles';
+import { UserH5pCurrentState } from '../../../types';
 
-export function H5pPlayerManagerComponent(props: H5pPlayerManagerComponentProps) {
+export function LiveUpdatePlayerComponent(props: LiveUpdatePlayerComponentProps) {
   const {
-    contentAsJson, h5pAsJson,
-    pluginApi, userId, userName,
+    contentAsJson, h5pAsJson, isFullscreen,
+    pluginApi, userId, userName, setFullscreenItem,
   } = props;
 
   const {
@@ -39,19 +40,28 @@ export function H5pPlayerManagerComponent(props: H5pPlayerManagerComponentProps)
     }
   }, [responseUserH5pCurrentStateList]);
 
+  const setFullscreen = (!isFullscreen) ? () => {
+    setFullscreenItem({ userId, userName });
+  } : null;
   return (
-    <div
+    <Styled.LiveUpdatePlayerWrapper
       key={userId}
-      style={{ minWidth: '100%' }}
     >
-      <h2>{userName}</h2>
-      <div>
+      <Styled.UserNameTitle>
+        {userName}
+      </Styled.UserNameTitle>
+      <Styled.UserLiveUpdatePlayerWrapper>
+        <Styled.LockedDiv
+          onClick={() => {
+            if (setFullscreen) setFullscreen();
+          }}
+        />
         {latestH5pStates.filter(
           (state, index) => !state.rendered
           || index === latestH5pStates.length - 1
           || !latestH5pStates[index + 1]?.rendered,
         ).map((state, index) => (
-          <H5pPresenterComponent
+          <H5pStateRendererComponent
             key={state.id}
             indexOfCurrentStateInList={index}
             stateListLength={latestH5pStates.length}
@@ -62,7 +72,7 @@ export function H5pPlayerManagerComponent(props: H5pPlayerManagerComponentProps)
             h5pAsJson={h5pAsJson}
           />
         ))}
-      </div>
-    </div>
+      </Styled.UserLiveUpdatePlayerWrapper>
+    </Styled.LiveUpdatePlayerWrapper>
   );
 }

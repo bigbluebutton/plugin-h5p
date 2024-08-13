@@ -12,3 +12,7 @@ export interface PresenterViewComponentProps {
     contentAsJson: string;
     h5pAsJson: string;
 }
+
+export interface H5pWrapperProps {
+    numberOfColumns: number;
+}

@@ -18,19 +18,19 @@ import {
   GenericContentInterface,
 } from 'bigbluebutton-html-plugin-sdk';
 
-import { GenericContentRenderFunction } from '../generic-component/component';
+import { GenericContentRenderFunction } from '../generic-content-area/component';
 
 import { H5pPluginProps } from './types';
 import { isValidJSON } from './utils';
-import PresenterViewerSidekickRenderResultFunction from '../generic-component/presenter-view/sidekick-content/component';
-import { TestResult } from '../generic-component/types';
+import PresenterViewerSidekickRenderResultFunction from '../generic-content-area/presenter-view/sidekick-content/component';
+import { TestResult } from '../generic-content-area/types';
 
 interface DataToGenericLink {
   contentJson?: string,
   link?: string,
 }
 
-function H5pPlugin(
+function PluginManager(
   { pluginUuid: uuid }: H5pPluginProps,
 ): React.ReactElement {
   BbbPluginSdk.initialize(uuid);
@@ -220,4 +220,4 @@ function H5pPlugin(
   return null;
 }
 
-export default H5pPlugin;
+export default PluginManager;

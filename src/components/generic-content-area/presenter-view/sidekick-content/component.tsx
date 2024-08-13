@@ -3,7 +3,7 @@ import { BbbPluginSdk, DataChannelTypes } from 'bigbluebutton-html-plugin-sdk';
 import { PresenterViewerRenderFunctionProps } from './types';
 import * as Styled from './styles';
 import { MoreInfoUser, TestResult, UsersMoreInformationGraphqlResponse } from '../../types';
-import { extractH5pContents } from '../../../h5p-plugin/utils';
+import { extractH5pContents } from '../../../plugin-manager/utils';
 import { H5pAsJsonObject } from '../../../../commons/types';
 import { USERS_MORE_INFORMATION } from '../../subscriptions';
 

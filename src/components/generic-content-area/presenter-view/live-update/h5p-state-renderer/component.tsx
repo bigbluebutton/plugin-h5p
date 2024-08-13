@@ -4,10 +4,10 @@ import {
   useRef,
   useState,
 } from 'react';
-import { renderH5pForPresenter } from '../../h5p-renderer/utils';
+import { renderH5pForPresenter } from '../../../../../h5p-renderer/utils';
 import { H5pPresenterComponentProps } from './types';
 
-function H5pPresenterComponent(props: H5pPresenterComponentProps) {
+function H5pStateRendererComponent(props: H5pPresenterComponentProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [contentRendered, setContentRendered] = useState(false);
 
@@ -19,14 +19,14 @@ function H5pPresenterComponent(props: H5pPresenterComponentProps) {
 
   useEffect(() => {
     if (setLatestH5pStates && contentRendered) {
-      setLatestH5pStates((prev) => {
+      setTimeout(() => setLatestH5pStates((prev) => {
         const result = prev.map((state) => {
           const modifiedState = { ...state };
           if (state.id === idOfCurrentState) modifiedState.rendered = true;
           return modifiedState;
         });
         return result;
-      });
+      }), 50);
     }
   }, [contentRendered, setLatestH5pStates, idOfCurrentState]);
 
@@ -38,9 +38,9 @@ function H5pPresenterComponent(props: H5pPresenterComponentProps) {
         contentAsJson,
         h5pAsJson,
         setContentRendered,
-        ['https://bigbluebutton.nyc3.digitaloceanspaces.com/plugins/h5p/assets/custom/css/custom-crossword.css'],
+        ['/plugins/h5p/assets/css/custom-crossword.css'],
       ),
-      100,
+      50,
     );
 
     return () => {
@@ -51,14 +51,14 @@ function H5pPresenterComponent(props: H5pPresenterComponentProps) {
   return (
     <div
       style={{
-        position: 'relative',
-        width: '100%',
+        position: 'absolute',
+        left: '50%',
+        transform: 'translate(-50%, 0)',
       }}
     >
       <div
         id="h5p-internal-container"
         style={{
-          minWidth: '100%',
           height: '100%',
           display: 'flex',
           justifyContent: 'center',
@@ -66,10 +66,8 @@ function H5pPresenterComponent(props: H5pPresenterComponentProps) {
       >
         <div
           style={{
-            padding: '2px 50px',
-            width: '70%',
-            position: 'absolute',
-            blockSize: 'fit-content',
+            width: '100%',
+            maxHeight: '100%',
           }}
           ref={containerRef}
         />
@@ -78,4 +76,4 @@ function H5pPresenterComponent(props: H5pPresenterComponentProps) {
   );
 }
 
-export default H5pPresenterComponent;
+export default H5pStateRendererComponent;
