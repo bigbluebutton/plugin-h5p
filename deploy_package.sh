@@ -3,8 +3,11 @@ if [ -f libraries.h5p ]; then
     sudo cp -r /var/www/bigbluebutton-default/assets/plugins/h5p /var/www/bigbluebutton-default/assets/plugins/h5p-backup
     sudo rm -rf /var/www/bigbluebutton-default/assets/plugins/h5p
   fi 
-  sudo mkdir -p /var/www/bigbluebutton-default/assets/plugins/h5p
+  sudo mkdir -p /var/www/bigbluebutton-default/assets/plugins/h5p/assets/css
   sudo cp libraries.h5p /var/www/bigbluebutton-default/assets/plugins/h5p
+  sudo cp assets/css/* /var/www/bigbluebutton-default/assets/plugins/h5p/assets/css
+  
+  # Changing directory
   cd /var/www/bigbluebutton-default/assets/plugins/h5p/
   sudo unzip libraries.h5p
   sudo rm libraries.h5p
