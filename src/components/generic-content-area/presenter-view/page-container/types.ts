@@ -6,7 +6,7 @@ export interface UserToBeRendered {
 }
 export interface PresenterViewComponentProps {
     pluginApi: PluginApi;
-    listOfStudentsWithH5pState: UserToBeRendered[];
+    listOfStudentsToBeRendered: UserToBeRendered[];
     contentAsJson: string;
     h5pAsJson: string;
 }

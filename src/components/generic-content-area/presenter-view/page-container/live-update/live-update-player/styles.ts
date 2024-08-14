@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface LockedDivProps {
   zIndex?: number;
+  numberOfItemsPerPage: number;
 }
 
 const LockedDiv = styled.div<LockedDivProps>`
@@ -12,7 +13,7 @@ const LockedDiv = styled.div<LockedDivProps>`
   position: absolute;
   z-index: 100;
   &:hover {
-    cursor: zoom-in;
+    cursor: ${({ numberOfItemsPerPage }) => ((numberOfItemsPerPage > 1) ? 'zoom-in' : 'not-allowed')};
   }
 `;
 
@@ -33,6 +34,7 @@ const UserNameTitle = styled.h2`
 
 const UserLiveUpdatePlayerWrapper = styled.div`
   height: 100%;
+  position: relative;
 `;
 
 export {

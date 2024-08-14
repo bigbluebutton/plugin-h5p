@@ -1,5 +1,5 @@
 import { PluginApi } from 'bigbluebutton-html-plugin-sdk';
-import { UserToBeRendered } from '../../types';
+import { UserToBeRendered } from '../../../types';
 
 export interface FullscreenLiveUpdatePlayerProps {
   userName: string

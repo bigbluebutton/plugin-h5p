@@ -24,6 +24,7 @@ export function FullscreenLiveUpdatePlayer(props: FullscreenLiveUpdatePlayerProp
         <LiveUpdatePlayerComponent
           userId={userId}
           isFullscreen
+          numberOfItemsPerPage={1}
           userName={userName}
           contentAsJson={contentAsJson}
           pluginApi={pluginApi}

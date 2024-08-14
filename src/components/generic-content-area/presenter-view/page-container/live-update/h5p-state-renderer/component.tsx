@@ -4,7 +4,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { renderH5pForPresenter } from '../../../../../h5p-renderer/utils';
+import { renderH5pForPresenter } from '../../../../../../h5p-renderer/utils';
 import { H5pPresenterComponentProps } from './types';
 
 function H5pStateRendererComponent(props: H5pPresenterComponentProps) {

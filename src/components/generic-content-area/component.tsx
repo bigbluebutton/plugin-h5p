@@ -9,11 +9,10 @@ import { equals } from 'ramda';
 import {
   GenericContentRenderFunctionProps,
   LADTestResult,
-  TestResult, UserH5pCurrentState, UsersMoreInformationGraphqlResponse,
+  TestResult, UserH5pCurrentState,
 } from './types';
 import NonPresenterViewComponent from './non-presenter-view/component';
 import PresenterViewComponent from './presenter-view/component';
-import { USERS_MORE_INFORMATION } from './subscriptions';
 import { extractH5pContents } from '../plugin-manager/utils';
 import { UserToBeRendered } from './presenter-view/types';
 
@@ -29,8 +28,8 @@ export function GenericContentRenderFunction(props: GenericContentRenderFunction
     data: h5pLatestStateUpdate,
   } = pluginApi.useDataChannel<UserH5pCurrentState>('testResult', DataChannelTypes.All_ITEMS, 'userH5pCurrentState');
   const [
-    listOfStudentsToBeRendered,
-    setListOfStudentsToBeRendered,
+    listOfStudentsWithH5pState,
+    setListOfStudentsWithH5pState,
   ] = useState<UserToBeRendered[]>([]);
   useEffect(() => {
     const listOfStudents = h5pLatestStateUpdate?.data?.filter(
@@ -39,8 +38,8 @@ export function GenericContentRenderFunction(props: GenericContentRenderFunction
       userId: item.payloadJson.userId,
       userName: item.payloadJson.userName,
     }));
-    if (!equals(listOfStudents, listOfStudentsToBeRendered)) {
-      setListOfStudentsToBeRendered(listOfStudents);
+    if (!equals(listOfStudents, listOfStudentsWithH5pState)) {
+      setListOfStudentsWithH5pState(listOfStudents);
     }
   }, [h5pLatestStateUpdate]);
 
@@ -51,11 +50,6 @@ export function GenericContentRenderFunction(props: GenericContentRenderFunction
   const { pushEntry: pushEntryTestResult } = pluginApi.useDataChannel<TestResult>('testResult', DataChannelTypes.LATEST_ITEM);
   const { pushEntry: pushEntryLadTestResult } = pluginApi.useDataChannel<LADTestResult>('testResult', DataChannelTypes.LATEST_ITEM, 'learning-analytics-dashboard');
 
-  const allUsersInfo = pluginApi.useCustomSubscription<UsersMoreInformationGraphqlResponse>(
-    USERS_MORE_INFORMATION,
-  );
-  const usersList = allUsersInfo?.data?.user;
-
   const { contentAsJson, h5pAsJson } = extractH5pContents(h5pContentText);
 
   // TODO: Filter the ones where the loading is not done yet (needs refactor in html5)
@@ -65,9 +59,8 @@ export function GenericContentRenderFunction(props: GenericContentRenderFunction
       ? (
         <PresenterViewComponent
           pluginApi={pluginApi}
-          usersList={usersList}
           contentAsJson={contentAsJson}
-          listOfStudentsToBeRendered={listOfStudentsToBeRendered}
+          listOfStudentsWithH5pState={listOfStudentsWithH5pState}
           h5pAsJson={h5pAsJson}
         />
       )

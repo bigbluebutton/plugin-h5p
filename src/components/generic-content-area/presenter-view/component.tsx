@@ -1,55 +1,68 @@
-import { pluginLogger } from 'bigbluebutton-html-plugin-sdk';
-import * as React from 'react';
 import { useState } from 'react';
+import * as React from 'react';
 import { PresenterViewComponentProps, UserToBeRendered } from './types';
 import * as Styled from './styles';
-import { LiveUpdatePlayerComponent } from './live-update/live-update-player/component';
-import { FullscreenLiveUpdatePlayer } from './live-update/fullscreen-live-update-player/component';
+import PageContainerForLiveUpdates from './page-container/component';
+import { Button } from './button/component';
+
+const MAX_NUMBER_OF_USERS_PER_PAGE = 16;
 
 function PresenterViewComponent(props: PresenterViewComponentProps) {
   const {
-    pluginApi, contentAsJson, h5pAsJson, listOfStudentsToBeRendered,
+    pluginApi, contentAsJson, h5pAsJson, listOfStudentsWithH5pState,
   } = props;
 
-  const [fullscreenItem, setFullscreenItem] = useState<UserToBeRendered>();
+  const [currentPage, setCurrentPage] = useState(0);
 
-  const numberOfColumns = Math.min(4, Math.ceil(Math.sqrt(listOfStudentsToBeRendered?.length)));
+  const isPaginated = listOfStudentsWithH5pState?.length > MAX_NUMBER_OF_USERS_PER_PAGE;
 
-  console.log('teste aqui no number of columns ---> ', numberOfColumns, listOfStudentsToBeRendered);
-  pluginLogger.debug(`Debug log from Presenter View Component (Showing dataToBeRendered): ${listOfStudentsToBeRendered}`);
+  let paginatedList: UserToBeRendered[][] = [];
+  if (isPaginated) {
+    paginatedList = listOfStudentsWithH5pState.reduce((acc, curr, index) => {
+      const pageIndex = Math.floor(index / MAX_NUMBER_OF_USERS_PER_PAGE);
+      if (acc.length <= pageIndex) acc.push([]);
+      acc[pageIndex].push(curr);
+      return acc;
+    }, [] as UserToBeRendered[][]);
+  } else {
+    paginatedList = [listOfStudentsWithH5pState];
+  }
+  const totalNumberOfPages = paginatedList.length;
+
+  const handleChangePage = (delta: number) => {
+    const newCurrentPage = currentPage + delta;
+    if (newCurrentPage < totalNumberOfPages && newCurrentPage >= 0) {
+      setCurrentPage(newCurrentPage);
+    }
+  };
+
   return (
-    <Styled.PresenterViewComponentWrapper>
+    <Styled.PresenterView>
       {
-      fullscreenItem
-        ? (
-          <FullscreenLiveUpdatePlayer
-            userId={fullscreenItem.userId}
-            userName={fullscreenItem.userName}
-            contentAsJson={contentAsJson}
-            pluginApi={pluginApi}
-            setFullscreenItem={setFullscreenItem}
-            h5pAsJson={h5pAsJson}
+        (isPaginated && currentPage > 0)
+        && (
+          <Button
+            iconName="left_arrow"
+            onClick={() => handleChangePage(-1)}
           />
-        ) : null
+        )
       }
-      <Styled.LiveUpdatePlayerGrid
-        numberOfColumns={numberOfColumns}
-        id="h5p-wrapper"
-      >
-        {listOfStudentsToBeRendered?.map((item) => (
-          <LiveUpdatePlayerComponent
-            key={item.userId}
-            isFullscreen={false}
-            setFullscreenItem={setFullscreenItem}
-            userId={item.userId}
-            userName={item.userName}
-            contentAsJson={contentAsJson}
-            pluginApi={pluginApi}
-            h5pAsJson={h5pAsJson}
+      <PageContainerForLiveUpdates
+        pluginApi={pluginApi}
+        contentAsJson={contentAsJson}
+        listOfStudentsToBeRendered={paginatedList[currentPage]}
+        h5pAsJson={h5pAsJson}
+      />
+      {
+        (isPaginated && currentPage + 1 < totalNumberOfPages)
+        && (
+          <Button
+            iconName="right_arrow"
+            onClick={() => handleChangePage(1)}
           />
-        ))}
-      </Styled.LiveUpdatePlayerGrid>
-    </Styled.PresenterViewComponentWrapper>
+        )
+      }
+    </Styled.PresenterView>
   );
 }
 

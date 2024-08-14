@@ -8,3 +8,7 @@
 .h5p-crossword-clue-announcer {
 	display: none !important;
 }
+
+.h5p-question-content {
+	margin: 0;
+}

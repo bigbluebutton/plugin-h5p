@@ -1,5 +1,5 @@
 import { PluginApi } from 'bigbluebutton-html-plugin-sdk';
-import { UserToBeRendered } from '../../types';
+import { UserToBeRendered } from '../../../types';
 
 export interface LiveUpdatePlayerComponentProps {
   userName: string
@@ -8,6 +8,7 @@ export interface LiveUpdatePlayerComponentProps {
   h5pAsJson: string;
   userId: string;
   isFullscreen: boolean;
+  numberOfItemsPerPage: number;
   setFullscreenItem?: React.Dispatch<React.SetStateAction<UserToBeRendered>>;
 }
 export interface LatestH5pStateItem {

@@ -27,7 +27,7 @@ export const renderH5p = (
             setH5pState(state);
           }
         } : () => {},
-        embedType: (isModeratorView) ? 'iframe' : 'iframe',
+        embedType: 'iframe',
         frame: false,
         contentUserData: [
           {

@@ -5,11 +5,11 @@ import { useEffect, useState } from 'react';
 import { LiveUpdatePlayerComponentProps, LatestH5pStateItem } from './types';
 import H5pStateRendererComponent from '../h5p-state-renderer/component';
 import * as Styled from './styles';
-import { UserH5pCurrentState } from '../../../types';
+import { UserH5pCurrentState } from '../../../../types';
 
 export function LiveUpdatePlayerComponent(props: LiveUpdatePlayerComponentProps) {
   const {
-    contentAsJson, h5pAsJson, isFullscreen,
+    contentAsJson, h5pAsJson, isFullscreen, numberOfItemsPerPage,
     pluginApi, userId, userName, setFullscreenItem,
   } = props;
 
@@ -41,7 +41,7 @@ export function LiveUpdatePlayerComponent(props: LiveUpdatePlayerComponentProps)
   }, [responseUserH5pCurrentStateList]);
 
   const setFullscreen = (!isFullscreen) ? () => {
-    setFullscreenItem({ userId, userName });
+    if (numberOfItemsPerPage > 1) setFullscreenItem({ userId, userName });
   } : null;
   return (
     <Styled.LiveUpdatePlayerWrapper
@@ -52,6 +52,7 @@ export function LiveUpdatePlayerComponent(props: LiveUpdatePlayerComponentProps)
       </Styled.UserNameTitle>
       <Styled.UserLiveUpdatePlayerWrapper>
         <Styled.LockedDiv
+          numberOfItemsPerPage={numberOfItemsPerPage}
           onClick={() => {
             if (setFullscreen) setFullscreen();
           }}
