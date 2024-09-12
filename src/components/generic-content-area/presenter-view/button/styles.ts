@@ -18,9 +18,6 @@ const BBBIcon = styled.i`
   }
 `;
 
-// position: absolute;
-// left: 1.5em;
-
 const Button = styled.button`
   border: 0;
   vertical-align: middle;
