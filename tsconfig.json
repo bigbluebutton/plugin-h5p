@@ -8,5 +8,5 @@
         "allowJs": true,
         "moduleResolution": "node"
     },
-    "exclude": ["node_modules", "lib/h5p-standalone"]
+    "exclude": ["node_modules", "lib/h5p-standalone", "lib/h5p-standalone-from-tunapanda"]
 }

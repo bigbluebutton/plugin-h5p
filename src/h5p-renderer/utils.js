@@ -17,7 +17,7 @@ export const renderH5p = (
   if (el) {
     if (!el.querySelector('.h5p-iframe-wrapper')) {
       const previousState = isModeratorView
-        ? currentH5pStateToBeApplied : lastPayloadJson?.currentState;
+        ? currentH5pStateToBeApplied : lastPayloadJson;
       const options = {
         saveFreq: 1,
         saveFunctionCallback: !isModeratorView ? (state) => {
@@ -27,11 +27,11 @@ export const renderH5p = (
             setH5pState(state);
           }
         } : () => {},
-        embedType: (isModeratorView) ? 'div' : 'iframe',
+        embedType: 'iframe',
         frame: false,
         contentUserData: [
           {
-            state: JSON.stringify(previousState),
+            state: previousState,
           }],
         contentAsJson,
         h5pAsJson,

@@ -4,3 +4,11 @@
 .h5p-crossword-input-container {
 	display: none !important;
 }
+
+.h5p-crossword-clue-announcer {
+	display: none !important;
+}
+
+.h5p-question-content {
+	margin: 0;
+}

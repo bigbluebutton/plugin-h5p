@@ -1,13 +1,14 @@
 import * as React from 'react';
+import { DataChannelTypes } from 'bigbluebutton-html-plugin-sdk';
 import { useEffect, useRef, useState } from 'react';
-import { renderH5pForNonPresenter } from '../h5p-renderer/utils';
+import { renderH5pForNonPresenter } from '../../../h5p-renderer/utils';
 import { NonPresenterViewComponentProps } from './types';
-import * as Styled from '../styles';
+import * as Styled from './styles';
 import { CurrentH5pStateWindow, H5pAsJsonObject } from '../../../commons/types';
+import { UserH5pCurrentState } from '../types';
 
 declare const window: CurrentH5pStateWindow;
 
-window.currentH5pState = '';
 function NonPresenterViewComponent(props: NonPresenterViewComponentProps) {
   const stopInfinitLoop = useRef(false);
   const containerRef = useRef(null);
@@ -15,12 +16,23 @@ function NonPresenterViewComponent(props: NonPresenterViewComponentProps) {
   const [contentRendered, setContentRendered] = useState(false);
   const [h5pState, setH5pState] = useState({});
   const {
-    contentAsJson, currentUserName, h5pAsJson,
-    pushEntryTestResult, pushEntryLadTestResult, currentUserId,
-    pushH5pCurrentState, lastUpdateId, lastPayloadJson,
-    replaceH5pCurrentState, pluginApi,
+    contentAsJson, currentUserName, h5pAsJson, pushEntryTestResult,
+    pushEntryLadTestResult, currentUserId, pluginApi,
   } = props;
 
+  const {
+    data: responseUserH5pCurrentStateList,
+    pushEntry: pushH5pCurrentState,
+    replaceEntry: replaceH5pCurrentState,
+  } = pluginApi.useDataChannel<UserH5pCurrentState>('testResult', DataChannelTypes.All_ITEMS, 'userH5pCurrentState');
+
+  const responseObject = responseUserH5pCurrentStateList?.data?.filter(
+    (h5pStateFromList) => h5pStateFromList.payloadJson.userId === currentUserId,
+  ).map((h5pStateFromList) => (
+    { entryId: h5pStateFromList.entryId, payloadJson: h5pStateFromList.payloadJson }))[0];
+
+  const lastUpdateId = responseObject?.entryId;
+  const lastPayloadJson = responseObject?.payloadJson.currentState;
   const h5pAsJsonObject: H5pAsJsonObject = JSON.parse(h5pAsJson);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -67,24 +79,27 @@ function NonPresenterViewComponent(props: NonPresenterViewComponentProps) {
     }
   }, [h5pState]);
   useEffect(() => {
-    window.H5P?.externalDispatcher?.on('xAPI', eventHandler);
-    const timeoutReference = setTimeout(
-      renderH5pForNonPresenter(
-        containerRef,
-        lastPayloadJson,
-        setH5pState,
-        contentAsJson,
-        h5pAsJson,
-        setContentRendered,
-      ),
-      100,
-    );
+    if (responseUserH5pCurrentStateList) {
+      window.H5P?.externalDispatcher?.on('xAPI', eventHandler);
+      const timeoutReference = setTimeout(
+        renderH5pForNonPresenter(
+          containerRef,
+          lastPayloadJson,
+          setH5pState,
+          contentAsJson,
+          h5pAsJson,
+          setContentRendered,
+        ),
+        100,
+      );
 
-    return () => {
-      window.H5P?.externalDispatcher?.off('xAPI', eventHandler);
-      clearTimeout(timeoutReference);
-    };
-  }, []);
+      return () => {
+        window.H5P?.externalDispatcher?.off('xAPI', eventHandler);
+        clearTimeout(timeoutReference);
+      };
+    }
+    return null;
+  }, [responseUserH5pCurrentStateList]);
   if (pushEntryTestResult
     && pushEntryLadTestResult && !stopInfinitLoop.current && contentRendered) {
     stopInfinitLoop.current = true;
