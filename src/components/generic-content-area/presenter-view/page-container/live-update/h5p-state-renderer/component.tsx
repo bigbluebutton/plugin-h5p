@@ -15,10 +15,12 @@ function H5pStateRendererComponent(props: H5pPresenterComponentProps) {
     contentAsJson, h5pAsJson,
     currentH5pStateToBeApplied,
     setLatestH5pStates, idOfCurrentState,
+    isResetH5pComponentFlow, setH5pDomElement,
   } = props;
 
   useEffect(() => {
-    if (setLatestH5pStates && contentRendered) {
+    // Reset H5P component flow doesn't have the setCurrentState function
+    if (isResetH5pComponentFlow && setLatestH5pStates && contentRendered) {
       setTimeout(() => setLatestH5pStates((prev) => {
         const result = prev.map((state) => {
           const modifiedState = { ...state };
@@ -27,8 +29,10 @@ function H5pStateRendererComponent(props: H5pPresenterComponentProps) {
         });
         return result;
       }), 50);
+    } else if (!isResetH5pComponentFlow && contentRendered) {
+      setH5pDomElement(document.querySelectorAll('.h5p-iframe')[0] as HTMLIFrameElement);
     }
-  }, [contentRendered, setLatestH5pStates, idOfCurrentState]);
+  }, [contentRendered, setLatestH5pStates, idOfCurrentState, setH5pDomElement]);
 
   useEffect(() => {
     const timeoutReference = setTimeout(

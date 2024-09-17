@@ -89,7 +89,8 @@ function PluginManager(
           const indexOfH5P = longest[0].indexOf('H5P');
           const jsonContentWithlinebreaks = longest[0].substring(indexOfH5P + 3);
           const jsonContent = jsonContentWithlinebreaks.replace(/-(\r\n|\n|\r)/gm, '-')
-            .replace(/(\r\n|\n|\r)\./gm, '.').replace(/(\r\n|\n|\r)/gm, ' ');
+            .replace(/(?<=[\w])(\r\n|\n|\r)(?=[\w])/gm, '').replace(/(\r\n|\n|\r)\./gm, '.')
+            .replace(/(\r\n|\n|\r)/gm, ' ');
           pluginLogger.debug(`Debug log to see what comes from the slide text (jsonContentWithlinebreaks): ${jsonContentWithlinebreaks} \n\n (JSON.parse(jsonContent)): `, JSON.parse(jsonContent));
           if (isValidJSON(jsonContent)) {
             setLinkThatGeneratedJsonContent(currentTxtUri);
