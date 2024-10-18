@@ -62,19 +62,10 @@ npm install
 npm start
 ```
 
-3. Add reference to it on BigBlueButton's `settings.yml`:
+3. Send create call with the following parameter:
 
-```yaml
-  plugins:
-    - name: H5pPlugin
-      url: http://127.0.0.1:4701/static/H5pPlugin.js
-      dataChannels:
-        - name: jsonContent
-          pushPermission: ['moderator','presenter']
-          replaceOrDeletePermission: ['moderator', 'crerator', 'presenter']
-        - name: testResult
-          pushPermission: ['all']
-          replaceOrDeletePermission: ['moderator', 'creator']
+```
+pluginManifests=[{"url":"http://172.17.0.1:4701/manifest.json"}]
 ```
 
 ## Building and installing the Plugin
@@ -108,23 +99,10 @@ cp H5pPlugin.js /var/www/bigbluebutton-default/assets/plugins/plugin-h5p/
 
 This will make this plugin available on `https://<your-host>/plugins/plugin-h5p/H5pPlugin.js`
 
-To use the plugin with BigBlueButton, add the plugin's URL to `settings.yml` as shown below:
+To use the plugin with BigBlueButton, add the plugin's manifest URL to the parameter as shown below:
 
-```yaml
-public:
-  app:
-    ... // All app configurations
-  plugins:
-    - name: H5pPlugin
-      url: <<PLUGIN_URL>>
-      dataChannels:
-        - name: jsonContent
-          pushPermission: ['moderator','presenter']
-          replaceOrDeletePermission: ['moderator', 'creator', 'presenter']
-        - name: testResult
-          pushPermission: ['all']
-          replaceOrDeletePermission: ['moderator', 'creator']
-  ... // All other configurations
+```
+pluginManifests=[{"url":"http://<yourdomain>/path/to/manifest.json"}]
 ```
 
 ## How to use it?
