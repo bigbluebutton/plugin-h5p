@@ -12,8 +12,8 @@ export function IterativeSyncCurrentState(props: IterativeSyncCurrentStateProps)
     pluginApi, userId, userName, setFullscreenItem, setHasSyncCurentStateFlow,
   } = props;
 
-  const [h5pDomElemnt, setH5pDomElemnt] = useState<HTMLIFrameElement>(null);
-  const h5pStateController = h5pDomElemnt?.contentWindow as WindowWithH5p;
+  const [h5pDomElement, setH5pDomElement] = useState<HTMLIFrameElement>(null);
+  const h5pStateController = h5pDomElement?.contentWindow as WindowWithH5p;
 
   const {
     data: responseUserH5pCurrentStateList,
@@ -34,11 +34,11 @@ export function IterativeSyncCurrentState(props: IterativeSyncCurrentStateProps)
   }, [responseUserH5pCurrentStateList]);
 
   useEffect(() => {
-    if (h5pDomElemnt
-      && !(h5pDomElemnt?.contentWindow as WindowWithH5p)?.H5P?.instances[0].setCurrentState) {
+    if (h5pDomElement
+      && !(h5pDomElement?.contentWindow as WindowWithH5p)?.H5P?.instances[0].setCurrentState) {
       setHasSyncCurentStateFlow(false);
     }
-  }, [h5pDomElemnt]);
+  }, [h5pDomElement]);
 
   if (responseUserH5pCurrentStateList.loading) return null;
   return (
@@ -50,7 +50,7 @@ export function IterativeSyncCurrentState(props: IterativeSyncCurrentStateProps)
       setFullscreenItem={setFullscreenItem}
     >
       <H5pStateRendererComponent
-        setH5pDomElement={setH5pDomElemnt}
+        setH5pDomElement={setH5pDomElement}
         isResetH5pComponentFlow={false}
         currentH5pStateToBeApplied={dataToRender?.currentState}
         contentAsJson={contentAsJson}
