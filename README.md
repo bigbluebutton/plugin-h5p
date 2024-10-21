@@ -102,7 +102,7 @@ The above command will generate the `dist` folder containing the bundled JavaScr
 Preferebly, that bundled js file is placed into the Bigbluebutton's assets portion of the server, so for that, do the following: 
 
 ```bash
-mkir -p /var/www/bigbluebutton-default/assets/plugins/plugin-h5p/
+mkdir -p /var/www/bigbluebutton-default/assets/plugins/plugin-h5p/
 cp H5pPlugin.js /var/www/bigbluebutton-default/assets/plugins/plugin-h5p/
 ```
 
