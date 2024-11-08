@@ -182,6 +182,7 @@ function PluginManager(
               pluginUuid={uuid}
             />,
           );
+          return root;
         },
       }));
       mainAreaIsRendering = true;
@@ -206,6 +207,7 @@ function PluginManager(
               pluginUuid={uuid}
             />,
           );
+          return root;
         },
         buttonIcon: 'user',
         open: contentJson && contentJson !== '',
