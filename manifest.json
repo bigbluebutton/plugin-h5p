@@ -1,0 +1,17 @@
+{
+  "requiredSdkVersion": "~0.0.59",
+  "name": "H5pPlugin",
+  "javascriptEntrypointUrl": "H5pPlugin.js",
+  "dataChannels": [
+      {
+          "name": "jsonContent",
+          "pushPermission": ["moderator", "presenter"],
+          "replaceOrDeletePermission": ["creator", "moderator"]
+      },
+      {
+          "name": "testResult",
+          "pushPermission": ["all"],
+          "replaceOrDeletePermission": ["creator", "moderator"]
+      }
+  ]
+}
