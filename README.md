@@ -88,7 +88,7 @@ npm install
 npm run build-bundle
 ```
 
-The above command will generate the `dist` folder containing the bundled JavaScript file named `H5pPlugin.js`. This file can be hosted on any HTTPS server.
+The above commands will generate the `dist` folder containing the bundled JavaScript file named `H5pPlugin.js`. This file can be hosted on any HTTPS server.
 
 Preferebly, that bundled js file is placed into the Bigbluebutton's assets portion of the server, so for that, do the following: 
 
