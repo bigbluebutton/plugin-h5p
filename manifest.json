@@ -1,7 +1,7 @@
 {
   "requiredSdkVersion": "~0.0.59",
   "name": "H5pPlugin",
-  "javascriptEntrypointUrl": "http://127.0.0.1:4701/static/H5pPlugin.js",
+  "javascriptEntrypointUrl": "H5pPlugin.js",
   "dataChannels": [
       {
           "name": "jsonContent",

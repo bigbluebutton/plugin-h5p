@@ -8,7 +8,7 @@ module.exports = {
     filename: 'H5pPlugin.js',
     library: 'H5pPlugin',
     libraryTarget: 'umd',
-    publicPath: '/static/',
+    publicPath: '/',
     globalObject: 'this',
   },
   devServer: {

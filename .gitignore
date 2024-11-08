@@ -1,6 +1,7 @@
 node_modules/
 dist/
-lib/h5p-standalone/
+dist-tsc/
+lib/h5p-standalone*
 libraries.h5p
 debian/.debhelper/
 debian/debhelper-build-stamp
